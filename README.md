@@ -1,3 +1,10 @@
+# SacredSeed
+
+This is a pony experimentation game for Thenomain and Cobalt to mess around
+with Evennia and Python, and to eventually lose their minds.
+
+If you want to know more about Evennia, keep reading!
+
 # Welcome to Evennia!
 
 This is your game directory, set up to let you start with
@@ -38,4 +45,3 @@ Evennia's documentation is here:
 https://github.com/evennia/evennia/wiki.
 
 Enjoy!
-# SacredSeed
