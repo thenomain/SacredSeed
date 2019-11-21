@@ -60,7 +60,7 @@ class CmdWoDRoll(default_cmds.MuxCommand):
             min_success = 10
         success_values = [x for x in result if x >= min_success]
         successes = len(success_values)
-        self.caller.msg("> successes --> %r (%r)" % (success_values, successes))
+        # self.caller.msg("> successes --> %r (%r)" % (success_values, successes))
 
         # OUTPUT
         # target = self.rhs
