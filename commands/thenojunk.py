@@ -1,8 +1,9 @@
 # file SacredSeed/commands/thenojunk.py
 
 from evennia import default_cmds
-
+# from evennia import typeclasses
 # import re
+from evennia import utils
 from random import randint
 
 
@@ -18,25 +19,32 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
     key = "wod"
 
-    def __init__(self):
-        """
-        Set up some command settings. Must be global. Must be a better way to do this.
-        """
-        global CONST_MAX_POOL
-        CONST_MAX_POOL = 100  # max number of dice that can be sent to the final "pool" roller.
+# some globals
+    CONST_MAX_POOL = 100
 
     def func(self):
         "roll things"
 
-        # NO ARGS
-        if not self.args:
-            self.caller.msg("Nothing passed")
+        # NO ARGS -> return
+        if not self.args or not self.lhs:
+            self.caller.msg("Function format: wod <#>[=<targets>]")
             return
+
+        # DETERMINE TARGETS: 'here' but no other locations
+        if self.rhs:
+            target = self.caller.search(self.rhs)
+            if not target:
+                return
+        else:
+            target = self.caller
+
+#        if target.is_typeclass(Room, exact=false):  # 'false' means 'check all descendants'
+        if utils.inherits_from(target, "typeclasses.rooms.Room"):  # Derrin says Griatch prefers this
+            target = target.contents
 
         # BUILD POOL (# of dice to roll)
         value = self.lhs
         pool = 0
-        min_success = 8
 
         # For some reason the following ValueErrors on `int(1.6)`, though `@py int(1.6)` returns 2. Huh.
         try:
@@ -45,35 +53,37 @@ class CmdWoDRoll(default_cmds.MuxCommand):
         except ValueError:
             pool += self.calculate_trait(value)
 
-        if pool > CONST_MAX_POOL:
+        if pool > self.CONST_MAX_POOL:
             self.caller.msg("Too many dice")
             return
 
-        # ROLL
+        # ROLL THE POOL (`pool` dice)
         result = self.roll_pool(pool)
         # self.caller.msg("> # of dice ---> %i" % pool)
         # self.caller.msg("> result --> %r" % result)
 
         # SUCCESS COUNTER
-        # this thing is apparently called "list comprehension" and it's cool
         if pool <= 0:  # chance die
-            min_success = 10
-        success_values = [x for x in result if x >= min_success]
+            difficulty = 10
+        else:
+            difficulty = 8
+
+        # this thing is apparently called "list comprehension" and it's cool
+        success_values = [x for x in result if x >= difficulty]
         successes = len(success_values)
         # self.caller.msg("> successes --> %r (%r)" % (success_values, successes))
 
-        # OUTPUT
-        # target = self.rhs
-        # message = "Rolling " + str(value)
+        # OUTPUT TO TARGET
         result_pretty = []
+
         for x in result:
-            if x >= min_success:
+            if x >= difficulty:
                 result_pretty.append(f"|h{x}|n")
             else:
                 result_pretty.append(f"|x{x}|n")
         result_pretty = ' '.join(result_pretty)
 
-        # Darren's Idea: ' '.join(f|{"h" if x > 8 else "X"}{x}|n" for x in result])
+        # Darren's Idea: ' '.join(f"|{"h" if x > 8 else "X"}{x}|n" for x in result])
 
         message = f"Rolling: {value}\nResults: {result_pretty} "
         if successes >= 1:
