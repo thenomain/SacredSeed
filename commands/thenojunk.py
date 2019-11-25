@@ -1,10 +1,10 @@
 # file SacredSeed/commands/thenojunk.py
 
 from evennia import default_cmds
-# from evennia import typeclasses
-import re
 from evennia import utils
 from random import randint
+import re
+# from evennia import typeclasses
 
 
 class CmdWoDRoll(default_cmds.MuxCommand):
@@ -19,16 +19,19 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
     key = "wod"
 
-# some globals
-    CONST_MAX_POOL = 100
-    CONST_DIFFICULTY = 8
-    CONST_DIFFICULTY_CHANCE = 10
+    # some globals
+    MAX_POOL = 100
+    DIFFICULTY = 8
+    DIFFICULTY_CHANCE = 10
+    DEFAULT_AGAIN = 10
 
     def func(self):
         """
         wod <value>[=<targets>]
 
-        :return: None
+        Returns:
+            Doesn't return anything
+
         """
 
         # NO ARGS -> return
@@ -48,51 +51,36 @@ class CmdWoDRoll(default_cmds.MuxCommand):
             targets = targets.contents
 
         # BUILD POOL (# of dice to roll)
-        value = self.lhs
-        pool = self.build_pool(self.lhs)
-        if pool > self.CONST_MAX_POOL:
-            self.caller.msg("Too many dice")
+        text_input = re.sub(r' +', ' ', self.lhs)
+        pool, pretty_input = self.build_pool(text_input)
+        if pool > self.MAX_POOL:
+            self.caller.msg(f"{pool} is too many dice. I can only roll {self.MAX_POOL}.")
             return
 
         # ROLL THE POOL (`pool` dice)
         result = self.roll_pool(pool)
 
         # SUCCESS COUNTER
-        difficulty = self.CONST_DIFFICULTY if pool > 0 else self.CONST_DIFFICULTY_CHANCE
+        difficulty = self.DIFFICULTY if pool > 0 else self.DIFFICULTY_CHANCE
 
         # this thing is apparently called "list comprehension" and it's cool
         success_values = [x for x in result if x >= difficulty]
         successes = len(success_values)
 
-        # OUTPUT TO TARGETS
-        result_pretty = []
-
-        for x in result:
-            if x >= difficulty:
-                result_pretty.append(f"|h{x}|n")
-            else:
-                result_pretty.append(f"|x{x}|n")
-        result_pretty = ' '.join(result_pretty)
-
-        # Darren's Idea: ' '.join(f"|{"h" if x > difficulty else "X"}{x}|n" for x in result])
-
-        message = f"Rolling: {value}\nResults: {result_pretty} "
-        if successes >= 1:
-            message += "|G(success)|n"
-        else:
-            message += "|R(failure)|n"
+        message = self.build_output(pool, difficulty, result, successes, pretty_input)
 
         self.caller.msg(message)
 
     def build_pool(self, input_text):
         """
         How many dice do we need to roll?
+        Also build the output-ready version of input_text (may split this to another function)
 
         Args:
             input_text: <item>[ <operator> <item>]..., e.g., a + b - c + d
 
         Returns:
-            total number of dice to roll
+            total number of dice to roll, pretty version of the input
         """
         # re.split() includes elements found
         # uses + or - as an item to split on
@@ -101,24 +89,32 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
         total_pool = 0
         sign = 1
+        pretty_pool = ''
+        operator = ''
 
         for element in pool:
             if element == "+":
                 sign = 1
+                operator = " + "
             elif element == "-":
                 sign = -1
+                operator = " - "
             else:
                 try:
                     element = int(element)
-                    total_pool += self.calculate_number(element) * sign
+                    value, pretty_text = self.calculate_number(element)
+                    total_pool += value * sign
+                    pretty_pool += operator + pretty_text
                 except ValueError:
-                    total_pool += self.calculate_trait(element) * sign
+                    value, pretty_text = self.calculate_trait(element)
+                    total_pool += value * sign
+                    pretty_pool += operator + pretty_text
 
-        return total_pool
+        return total_pool, pretty_pool
 
     def calculate_number(self, value):
         "validate a single integer value; probably needs to do nothing"
-        return value
+        return value, str(value)
 
     def calculate_trait(self, trait):
         """
@@ -126,21 +122,26 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
         Depending on `trait` format:
         * trait - Pull trait from character sheet
-        * name:trait - Pull trait from someone else's sheet
+        * name:trait - Pull trait from someone else's sheet, with permissions
 
         Args:
             trait: Statistic on a character sheet or other known stat
 
         Returns:
-            number of dice this represents
+            number of dice this represents, prettified text of 'trait'
         """
-        return 0
+        trait = f"|x[{trait}]|n"
+        return 0, trait
 
     def roll_pool(self, pool):
         """
-        Roll some dice.
-        :param pool:Number of dice to roll; integer
-        :return: list[] of dice rolled in order, including in order of rerolls
+        Roll <pool> number of d10s.
+
+        Args:
+            pool: Number of dice to roll
+
+        Returns:
+            total number of dice to roll
         """
         result = []
         if pool > 0:
@@ -150,11 +151,15 @@ class CmdWoDRoll(default_cmds.MuxCommand):
         else:
             return self.roll_die()
 
-    def roll_die(self, again=10):
+    def roll_die(self, again=DEFAULT_AGAIN):
         """
         Roll 1d10. Roll another on a result of >= `again`
-        :param again: What value of the roll means "roll another die"
-        :return: list[] of die/dice results
+
+        Args:
+            again: What value of the roll means "roll another die"
+
+        Returns:
+            list[] of die/dice results
         """
         die = randint(1, 10)
         if (die >= again) and not (again == 0):
@@ -162,13 +167,34 @@ class CmdWoDRoll(default_cmds.MuxCommand):
         else:
             return [die]
 
-    def build_output(self, **kwargs):
+    def build_output(self, pool, difficulty, result, successes, pretty_input):
+        """
+        Just how do we show the output? With care.
+
+        Args:
+            pool: number of dice
+            difficulty: # at which or higher a success is counted
+            result: list[] of dice rolled, in order
+            successes: how many of those were successes?
+            pretty_input: pretty version of what the player entered (lhs)
+            ## targets: list[] of objects to tell
+        Returns:
+            the final text to output
         """
 
-        :param kwargs:
-            rolled: pretty version of what the player entered (lhs)
-            pool: number of dice
-            result: pretty version of the roll
-            targets: list[] of objects to tell
-        :return:
-        """
+        pretty_result = []
+
+        for x in result:
+            if x >= difficulty:
+                pretty_result.append(f"|h{x}|n")
+            else:
+                pretty_result.append(f"|x{x}|n")
+        pretty_result = ' '.join(pretty_result)
+
+        message = f"Rolling: {pretty_input} |x({pool} dice)|n\nResult: {pretty_result} "
+        if successes >= 1:
+            message += "|G(success)|n"
+        else:
+            message += "|R(failure)|n"
+
+        return message
