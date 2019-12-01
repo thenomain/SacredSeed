@@ -31,24 +31,21 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
         Returns:
             Doesn't return anything
-
         """
+        caller = self.caller
 
-        # NO ARGS -> return
+        # NO ARGS -> return with error
         if not self.lhs:
-            self.caller.msg("Function format: wod <#>[=<targets>]")
+            caller.msg("Usage: wod <pool>[ = <targets>]")
             return
 
-        # DETERMINE TARGETS: 'here' but no other locations
+        # DETERMINE TARGETS: spaces or commas?
         if self.rhs:
-            targets = self.caller.search(self.rhs)
+            targets = self.build_search_list(self.rhs)
             if not targets:
                 return
         else:
-            targets = self.caller
-
-        if utils.inherits_from(targets, "typeclasses.rooms.Room"):
-            targets = targets.contents
+            targets = [caller]
 
         # BUILD POOL (# of dice to roll)
         text_input = re.sub(r' +', ' ', self.lhs)
@@ -68,8 +65,40 @@ class CmdWoDRoll(default_cmds.MuxCommand):
         successes = len(success_values)
 
         message = self.build_output(pool, difficulty, result, successes, pretty_input)
+        message += f"\n>> Targets: {targets}"
 
         self.caller.msg(message)
+
+    def build_search_list(self, targets_string):
+        """
+
+        Args:
+            targets_string: space- or comma-delimited list of names
+        (see if we can't manage '...' as valid way to deal with spaces - unlikely)
+
+        Returns:
+            list[] of objects found
+
+        """
+        caller = self.caller
+        here = caller.location
+
+        if "," in targets_string:
+            delimiter = ","
+        else:
+            delimiter = " "
+
+        targets = [target.strip() for target in targets_string.split(delimiter)]  # remove spaces around each element
+        targets = [caller.search(target) for target in set(targets)]  # search each element, reporting misfires
+        targets = [target for target in targets if target]  # remove empty elements
+
+        if here in targets:
+            targets.remove(here)
+            targets += here.contents
+
+        targets = list(set().union(*[targets]))  # get rid of redundant targets
+
+        return targets
 
     def build_pool(self, input_text):
         """
@@ -84,7 +113,7 @@ class CmdWoDRoll(default_cmds.MuxCommand):
         """
         # re.split() includes elements found
         # uses + or - as an item to split on
-        # e.g. 'a + b - c + d' --> '['a ', '+', ' b ', '-', ' c ', '+', ' d']
+        # e.g. 'a + b - c + d' --> '['a', '+', 'b', '-', 'c', '+', 'd']
         pool = re.split(r'\s*([+-])\s*', input_text)
 
         total_pool = 0
