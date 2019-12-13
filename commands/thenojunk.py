@@ -1,9 +1,12 @@
 # file SacredSeed/commands/thenojunk.py
 
 from evennia import default_cmds
-from evennia import utils
 from random import randint
 import re
+
+from thenocode.finders import build_search_list
+
+# from evennia import utils
 # from evennia import typeclasses
 
 
@@ -41,7 +44,8 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
         # DETERMINE TARGETS: spaces or commas?
         if self.rhs:
-            targets = self.build_search_list(self.rhs)
+            targets = build_search_list(self, self.rhs)
+            # targets = self.build_search_list(self.rhs)
             if not targets:
                 return
         else:
@@ -68,37 +72,6 @@ class CmdWoDRoll(default_cmds.MuxCommand):
         message += f"\n>> Targets: {targets}"
 
         self.caller.msg(message)
-
-    def build_search_list(self, targets_string):
-        """
-
-        Args:
-            targets_string: space- or comma-delimited list of names
-        (see if we can't manage '...' as valid way to deal with spaces - unlikely)
-
-        Returns:
-            list[] of objects found
-
-        """
-        caller = self.caller
-        here = caller.location
-
-        if "," in targets_string:
-            delimiter = ","
-        else:
-            delimiter = " "
-
-        targets = [target.strip() for target in targets_string.split(delimiter)]  # remove spaces around each element
-        targets = [caller.search(target) for target in set(targets)]  # search each element, reporting misfires
-        targets = [target for target in targets if target]  # remove empty elements
-
-        if here in targets:
-            targets.remove(here)
-            targets += here.contents
-
-        targets = list(set().union(*[targets]))  # get rid of redundant targets
-
-        return targets
 
     def build_pool(self, input_text):
         """
