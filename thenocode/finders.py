@@ -1,19 +1,19 @@
 def build_search_list(self, targets_string):
     """
     Function to build a target list on the following criteria:
-        "here" expands to all objects in self's location
-        otherwise the string list of names looks for corresponding character objects
+        "here" returns the location object of the enactor
+        otherwise looks for corresponding character objects
 
     Args:
         self: class object of Command or MuxCommand type
         targets_string: space- or comma-delimited list of names
 
     Returns:
-        list[] of objects found
+        list[] of objects found, 'here' returning caller's containing room
 
     """
     caller = self.caller
-    here = caller.location
+    # here = caller.location
 
     if "," in targets_string:
         delimiter = ","
@@ -24,9 +24,14 @@ def build_search_list(self, targets_string):
     targets = [caller.search(target) for target in set(targets)]  # search each element, reporting misfires
     targets = [target for target in targets if target]  # remove empty elements
 
-    if here in targets:
-        targets.remove(here)
-        targets += here.contents
+    if (caller.location not in targets) and (caller not in targets):
+        targets += [caller]
+
+    if caller.location in targets:
+        # targets_set = set(targets)
+        # targets_set= set(targets).difference(set(caller.location.contents))
+        # targets = list(targets_set)
+        targets = list(set(targets).difference(set(caller.location.contents)))
 
     targets = list(set().union(*[targets]))  # get rid of redundant targets
 

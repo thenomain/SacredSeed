@@ -3,11 +3,10 @@
 from evennia import default_cmds
 from random import randint
 import re
-
 from thenocode.finders import build_search_list
 
 # from evennia import utils
-# from evennia import typeclasses
+# from typeclasses.rooms import Room
 
 
 class CmdWoDRoll(default_cmds.MuxCommand):
@@ -17,7 +16,7 @@ class CmdWoDRoll(default_cmds.MuxCommand):
     Usage:
       wod <# of dice>[=<target(s)>]
 
-    Current state: Returns a bunch of d10s rolled to the user.
+    Current state: Returns a bunch of d10s rolled to the target(s).
     """
 
     key = "wod"
@@ -42,20 +41,20 @@ class CmdWoDRoll(default_cmds.MuxCommand):
             caller.msg("Usage: wod <pool>[ = <targets>]")
             return
 
-        # DETERMINE TARGETS: spaces or commas?
+        # DETERMINE TARGETS
         if self.rhs:
             targets = build_search_list(self, self.rhs)
-            # targets = self.build_search_list(self.rhs)
             if not targets:
+                caller.msg("No valid targets. Roll aborted.")
                 return
         else:
-            targets = [caller]
+            targets = caller.location
 
         # BUILD POOL (# of dice to roll)
         text_input = re.sub(r' +', ' ', self.lhs)
         pool, pretty_input = self.build_pool(text_input)
         if pool > self.MAX_POOL:
-            self.caller.msg(f"{pool} is too many dice. I can only roll {self.MAX_POOL}.")
+            caller.msg(f"{pool} is too many dice. I can only roll {self.MAX_POOL}.")
             return
 
         # ROLL THE POOL (`pool` dice)
@@ -68,10 +67,15 @@ class CmdWoDRoll(default_cmds.MuxCommand):
         success_values = [x for x in result if x >= difficulty]
         successes = len(success_values)
 
+        # OUTPUT RESULT
         message = self.build_output(pool, difficulty, result, successes, pretty_input)
         message += f"\n>> Targets: {targets}"
 
-        self.caller.msg(message)
+        for target in targets:
+            if caller in target.contents:
+                target.msg_contents(message)
+            else:
+                target.msg(message)
 
     def build_pool(self, input_text):
         """
@@ -115,7 +119,13 @@ class CmdWoDRoll(default_cmds.MuxCommand):
         return total_pool, pretty_pool
 
     def calculate_number(self, value):
-        "validate a single integer value; probably needs to do nothing"
+        """
+        Args:
+            value: number of dice to roll
+
+        Returns:
+            number of dice to roll (i.e. 'value'), prettified text version of 'value'
+        """
         return value, str(value)
 
     def calculate_trait(self, trait):
