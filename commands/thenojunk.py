@@ -3,7 +3,7 @@
 from evennia import default_cmds
 from random import randint
 import re
-from thenocode.finders import build_search_list
+from thenocode.finders import build_targets_list
 
 # from evennia import utils
 # from typeclasses.rooms import Room
@@ -43,12 +43,12 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
         # DETERMINE TARGETS
         if self.rhs:
-            targets = build_search_list(self, self.rhs)
+            targets = build_targets_list(self, self.rhs)
             if not targets:
                 caller.msg("No valid targets. Roll aborted.")
                 return
         else:
-            targets = caller.location
+            targets = [caller.location]
 
         # BUILD POOL (# of dice to roll)
         text_input = re.sub(r' +', ' ', self.lhs)
@@ -80,7 +80,7 @@ class CmdWoDRoll(default_cmds.MuxCommand):
     def build_pool(self, input_text):
         """
         How many dice do we need to roll?
-        Also build the output-ready version of input_text (may split this to another function)
+        Also build the output-ready version of input_text
 
         Args:
             input_text: <item>[ <operator> <item>]..., e.g., a + b - c + d
