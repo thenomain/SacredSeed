@@ -43,7 +43,7 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
         # DETERMINE TARGETS
         if self.rhs:
-            targets = build_targets_list(self, self.rhs)
+            targets = build_targets_list(self, self.rhs, True)
             if not targets:
                 caller.msg("No valid targets. Roll aborted.")
                 return
@@ -196,11 +196,11 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
         pretty_result = []
 
-        for x in result:
-            if x >= difficulty:
-                pretty_result.append(f"|h{x}|n")
+        for r in result:
+            if r >= difficulty:
+                pretty_result.append(f"|h{r}|n")
             else:
-                pretty_result.append(f"|x{x}|n")
+                pretty_result.append(f"|x{r}|n")
         pretty_result = ' '.join(pretty_result)
 
         message = f"Rolling: {pretty_input} |x({pool} dice)|n\nResult: {pretty_result} "

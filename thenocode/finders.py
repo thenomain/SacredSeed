@@ -25,10 +25,10 @@ def build_targets_list(self, targets_string, include_disconnected=True):
     targets = [t for t in targets if t]  # remove empty elements
 
     if not include_disconnected:
-        for i, t in enumerate(targets):
-            if (not t.is_connected) or (not t == caller.location):
-                caller.msg(f"{t} is not connected")
-                targets.remove(i)
+        for t in targets[:]:  # make a temporary copy of 'targets' to iterate over, because of remove()
+            if (not t.is_connected) and (not t == caller.location):
+                caller.msg(f"'{t}' is not connected.")
+                targets.remove(t)
         # targets = [t for t in targets if (not t.is_connected) or (not t == caller.location)]
 
     if (caller.location not in targets) and (caller not in targets):
