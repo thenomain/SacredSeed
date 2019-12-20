@@ -20,16 +20,22 @@ def build_targets_list(self, targets_string, include_disconnected=True):
     else:
         delimiter = " "
 
-    targets = [t.strip() for t in targets_string.split(delimiter)]  # remove spaces around each element
-    targets = [caller.search(t) for t in set(targets)]  # search each element, report misfires, remove repeats
-    targets = [t for t in targets if t]  # remove empty elements
+    targets_list = [t.strip() for t in targets_string.split(delimiter)]
+    targets = []
 
-    if not include_disconnected:
-        for t in targets[:]:  # make a temporary copy of 'targets' to iterate over, because of remove()
-            if (not t.is_connected) and (not t == caller.location):
-                caller.msg(f"'{t}' is not connected.")
-                targets.remove(t)
-        # targets = [t for t in targets if (not t.is_connected) or (not t == caller.location)]
+    for t in targets_list:
+        found = caller.search(t)
+        if (found is not None) and (found not in targets):
+            if not include_disconnected:
+                if (not found.is_connected) and (not found == caller.location):
+                    caller.msg(f"'{found}' is not connected.")
+                else:
+                    targets.append(found)
+
+        # for t in targets[:]:  # make a temporary copy of 'targets' to iterate over, because of remove()
+                # if (not t.is_connected) and (not t == caller.location):
+                # caller.msg(f"'{t}' is not connected.")
+                # targets.remove(t)
 
     if (caller.location not in targets) and (caller not in targets):
         targets += [caller]

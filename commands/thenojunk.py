@@ -43,7 +43,7 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
         # DETERMINE TARGETS
         if self.rhs:
-            targets = build_targets_list(self, self.rhs, True)
+            targets = build_targets_list(self, self.rhs, False)
             if not targets:
                 caller.msg("No valid targets. Roll aborted.")
                 return
@@ -69,13 +69,16 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
         # OUTPUT RESULT
         message = self.build_output(pool, difficulty, result, successes, pretty_input)
-        message += f"\n>> Targets: {targets}"
+        message += f"\n[Targets: {self.prettify_targets(targets)}]"
+        caller.msg(self.styled_header("test"))
 
         for target in targets:
             if caller in target.contents:
                 target.msg_contents(message)
             else:
                 target.msg(message)
+
+        caller.msg(self.styled_footer(self.prettify_targets(targets)))
 
     def build_pool(self, input_text):
         """
@@ -208,5 +211,25 @@ class CmdWoDRoll(default_cmds.MuxCommand):
             message += "|G(success)|n"
         else:
             message += "|R(failure)|n"
+
+        return message
+
+    def prettify_targets(self, targets):
+        """
+        Args:
+            targets: Objects being shown the output
+
+        Returns:
+            some pretty text like 'here'
+        """
+        message = []
+
+        for t in targets:
+            if t == self.caller.location:
+                message.append("Here")
+            else:
+                message.append(str(t))
+
+        message = ", ".join(message)
 
         return message
