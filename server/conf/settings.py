@@ -4,7 +4,7 @@ Evennia settings file.
 The available options are found in the default settings file found
 here:
 
-/Users/jenkins/Documents/Projects/Evennia/evennia/evennia/settings_default.py
+/Users/fubar/Documents/Projects/Evennia/evennia/evennia/settings_default.py
 
 Remember:
 
@@ -34,6 +34,15 @@ from evennia.settings_default import *
 # This is the name of your game. Make it catchy!
 SERVERNAME = "SacredSeed"
 
+######################################################################
+# Default command sets and commands
+######################################################################
+
+# We use this to make it easier to change command output
+# headers/footers.
+# This does not require updating Objects in the database.
+
+COMMAND_DEFAULT_CLASS = "commands.command.MuxCommand"
 
 ######################################################################
 # Settings given in secret_settings.py override those in this file.

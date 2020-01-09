@@ -1,15 +1,22 @@
 # file SacredSeed/commands/thenojunk.py
 
-from evennia import default_cmds
+# Assure that our command class is the default set by the game
+from django.conf import settings
+from evennia.utils import utils
+
+COMMAND_DEFAULT_CLASS = utils.class_from_module(settings.COMMAND_DEFAULT_CLASS)
+
+# <Griatch> You could make a ticket for trying to add that line to evennia.init.py (the flat API).
+#   I couldn't promise it would work well to do so but it would be pretty neat to be able to offer
+#   the default like that I suppose.
+
 from random import randint
 import re
 from thenocode.finders import build_targets_list
-
-# from evennia import utils
-# from typeclasses.rooms import Room
+# from thenocode.formaters import header, footer
 
 
-class CmdWoDRoll(default_cmds.MuxCommand):
+class CmdWoDRoll(COMMAND_DEFAULT_CLASS):
     """
     Theno's WoD Roller
 
@@ -69,7 +76,8 @@ class CmdWoDRoll(default_cmds.MuxCommand):
 
         # OUTPUT RESULT
         message = self.build_output(pool, difficulty, result, successes, pretty_input)
-        message += f"\n[Targets: {self.prettify_targets(targets)}]"
+        # message += f"\n[Targets: {self.prettify_targets(targets)}]"
+        # caller.msg(header(self, "test"))
         caller.msg(self.styled_header("test"))
 
         for target in targets:
@@ -78,6 +86,7 @@ class CmdWoDRoll(default_cmds.MuxCommand):
             else:
                 target.msg(message)
 
+        # caller.msg(footer(self, self.prettify_targets(targets)))
         caller.msg(self.styled_footer(self.prettify_targets(targets)))
 
     def build_pool(self, input_text):
