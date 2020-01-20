@@ -5,8 +5,13 @@ Commands describe the input the account can do to the game.
 
 """
 
+# Insert an inheritance layer below MuxCommand, for styles
+# (This does not require updating Objects in the database.)
+# step 1: In server.conf.settings, add
+#         COMMAND_DEFAULT_CLASS = "commands.command.MuxCommand"
+# step 2: below
+
 from evennia.commands.default.muxcommand import MuxCommand as BaseMuxCommand
-# from evennia import MuxCommand as BaseMuxCommand
 
 # -------------------------------------------------------------
 #
@@ -47,6 +52,7 @@ class MuxCommand(BaseMuxCommand):
 
     """
 
+    # override styles from evennia.commands.command
     def styled_header(self, *args, **kwargs):
         """
         Create a pretty header.

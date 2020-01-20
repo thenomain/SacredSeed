@@ -38,9 +38,11 @@ SERVERNAME = "SacredSeed"
 # Default command sets and commands
 ######################################################################
 
-# We use this to make it easier to change command output
-# headers/footers.
-# This does not require updating Objects in the database.
+# Insert an inheritance layer below MuxCommand, for styles
+# (This does not require updating Objects in the database.)
+# step 1: below
+# step 2: In commands.command, add:
+#         from evennia.commands.default.muxcommand import MuxCommand as BaseMuxCommand
 
 COMMAND_DEFAULT_CLASS = "commands.command.MuxCommand"
 
