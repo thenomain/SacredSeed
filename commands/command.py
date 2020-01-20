@@ -53,11 +53,12 @@ class MuxCommand(BaseMuxCommand):
     """
 
     # override styles from evennia.commands.command
-    def styled_header(self, *args, **kwargs):
+    def styled_header(self, message=None, *args, **kwargs):
         """
         Create a pretty header.
         """
-        return "----- wut? -----"
+        # return f"----- {message} -----"
+        pass
         # if "mode" not in kwargs:
         #     kwargs["mode"] = "separator"
         # return self._render_decoration(*args, **kwargs)
