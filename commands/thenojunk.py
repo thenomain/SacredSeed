@@ -13,7 +13,7 @@ COMMAND_DEFAULT_CLASS = utils.class_from_module(settings.COMMAND_DEFAULT_CLASS)
 from random import randint
 import re
 from thenocode.finders import build_targets_list
-# from thenocode.formaters import header, footer
+from thenocode.formaters import header, footer
 
 
 class CmdWoDRoll(COMMAND_DEFAULT_CLASS):
@@ -77,8 +77,8 @@ class CmdWoDRoll(COMMAND_DEFAULT_CLASS):
         # OUTPUT RESULT
         message = self.build_output(pool, difficulty, result, successes, pretty_input)
         # message += f"\n[Targets: {self.prettify_targets(targets)}]"
-        # caller.msg(header(self, "test"))
-        caller.msg(self.styled_header("test"))
+        caller.msg(self.styled_header("test built-in header"))
+        caller.msg(header(self, "test thenoheader"))
 
         for target in targets:
             if caller in target.contents:
