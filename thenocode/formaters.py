@@ -8,8 +8,8 @@ There is a lot of repetition here because the exact way these borders look will 
 def header(self, text, width=None):
     """
     Args:
+        self: command calling the header
         text: text, if any, to show
-        self: command calling the header (optional)
         width: A certain width passed, or None
 
     Returns:
@@ -19,7 +19,8 @@ def header(self, text, width=None):
     so we get to build our own.
     """
     width = width or self.client_width() or 80
-    border = style_border_repeats("|h|x=|h|b=|n", width)
+    pattern = "|h|x=|h|b=|n"
+    border = style_border_repeats(pattern, width)
 
     if text:
         text = ansi.ANSIString(f"|n|h< {text} >|n")
@@ -30,7 +31,8 @@ def header(self, text, width=None):
 
 def footer(self, text, width=None):
     width = width or self.client_width() or 80
-    border = style_border_repeats("|h|b=|h|x=|n", width)
+    pattern = "|h|b=|h|x=|n"
+    border = style_border_repeats(pattern, width)
 
     if text:
         text = ansi.ANSIString(f"|n|h< {text} >|n")
@@ -41,7 +43,8 @@ def footer(self, text, width=None):
 
 def divider(self, text, width=None):
     width = width or self.client_width() or 80
-    border = style_border_repeats("|h|x-|h|b-|n", width)
+    pattern = "|h|x-|h|b-|n"
+    border = style_border_repeats(pattern, width)
 
     if text:
         text = ansi.ANSIString(f"|x|h|| |n{text} |x|h|||n")
@@ -73,14 +76,17 @@ def style_border_repeats(pattern, width):
     # See Issue #2030: https://github.com/evennia/evennia/issues/2030
     # Remove the +1 when issue is resolved.
     border = style_pattern * (math.ceil(width / style_width) + 1)
+
     # clip pattern to 'width'
     return border[0:width]
 
 
-def style_border_mirrored(pattern, width):
+def style_border_mirrors(pattern, width):
     """
     e.g.,
-        -=-=-=#> <#=-=-=-
+        -=>-=>-=> <=-<=-<=-
+        -=<>-=<>-=<> <>=-<>=-<>=-
+
     Args:
         pattern: pattern to output, then mirror
         width: width
@@ -123,7 +129,7 @@ def insert_text_right_just(border, text, offset=0):
     Args:
         border:
         text:
-        offset:
+        offset: how many characters to leave on the right
 
     Returns:
 
@@ -147,7 +153,7 @@ def insert_text_left_just(border, text, offset=0):
     Args:
         border:
         text:
-        offset:
+        offset: how many characters to leave on the left
 
     Returns:
 
