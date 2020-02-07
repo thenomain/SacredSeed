@@ -1,19 +1,18 @@
 # file SacredSeed/commands/thenojunk.py
 
-# Assure that our command class is the default set by the game
 from django.conf import settings
 from evennia.utils import utils
+from random import randint
+import re
+from thenocode.finders import build_targets_list
+from thenocode.formaters import header, footer, divider
 
+# Assure that our command class is the default set by the game
 COMMAND_DEFAULT_CLASS = utils.class_from_module(settings.COMMAND_DEFAULT_CLASS)
 
 # <Griatch> You could make a ticket for trying to add that line to evennia.init.py (the flat API).
 #   I couldn't promise it would work well to do so but it would be pretty neat to be able to offer
 #   the default like that I suppose.
-
-from random import randint
-import re
-from thenocode.finders import build_targets_list
-from thenocode.formaters import header, footer, divider
 
 
 class CmdWoDRoll(COMMAND_DEFAULT_CLASS):
