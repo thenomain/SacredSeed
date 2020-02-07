@@ -107,6 +107,7 @@ def insert_text_centered(border, text):
         text: the text to insert
 
     Returns:
+        new border
 
     """
     text_width = len(text)
@@ -127,11 +128,12 @@ def insert_text_right_just(border, text, offset=0):
     e.g.,
         ----------------------< text >--
     Args:
-        border:
-        text:
+        border: rendered border
+        text: text to insert
         offset: how many characters to leave on the right
 
     Returns:
+        new border
 
     """
     text_width = len(text)

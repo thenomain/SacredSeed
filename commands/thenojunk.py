@@ -31,7 +31,7 @@ class CmdWoDRoll(COMMAND_DEFAULT_CLASS):
     # some globals
     MAX_POOL = 100
     DIFFICULTY = 8
-    DIFFICULTY_CHANCE = 10
+    DIFFICULTY_CHANCE = 10  # difficulty on a chance-die
     DEFAULT_AGAIN = 10
 
     def func(self):
