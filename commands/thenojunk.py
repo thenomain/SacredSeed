@@ -5,7 +5,6 @@ from evennia.utils import utils
 from random import randint
 import re
 from thenocode.finders import build_targets_list
-from thenocode.formaters import header, footer, divider
 
 # Assure that our command class is the default set by the game
 COMMAND_DEFAULT_CLASS = utils.class_from_module(settings.COMMAND_DEFAULT_CLASS)
@@ -76,8 +75,7 @@ class CmdWoDRoll(COMMAND_DEFAULT_CLASS):
         # OUTPUT RESULT
         message = self.build_output(pool, difficulty, result, successes, pretty_input)
         # message += f"\n[Targets: {self.prettify_targets(targets)}]"
-        # caller.msg(self.styled_header("test built-in header"))
-        caller.msg(header(self, "test header"))
+        caller.msg(self.styled_header("test built-in header"))
 
         for target in targets:
             if caller in target.contents:
@@ -85,8 +83,7 @@ class CmdWoDRoll(COMMAND_DEFAULT_CLASS):
             else:
                 target.msg(message)
 
-        caller.msg(footer(self, self.prettify_targets(targets)))
-        # caller.msg(self.styled_footer(self.prettify_targets(targets)))
+        caller.msg(self.styled_footer(self.prettify_targets(targets)))
 
     def build_pool(self, input_text):
         """

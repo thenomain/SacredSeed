@@ -11,7 +11,9 @@ Commands describe the input the account can do to the game.
 #         COMMAND_DEFAULT_CLASS = "commands.command.MuxCommand"
 # step 2: below
 
+import math
 from evennia.commands.default.muxcommand import MuxCommand as BaseMuxCommand
+import evennia.utils.ansi as ansi
 
 # -------------------------------------------------------------
 #
@@ -53,12 +55,161 @@ class MuxCommand(BaseMuxCommand):
     """
 
     # override styles from evennia.commands.command
-    def styled_header(self, message=None, *args, **kwargs):
+    def styled_header(self, text=None, width=None):
         """
-        Create a pretty header.
+        Args:
+            self: command calling the header
+            text: text, if any, to show
+            width: A certain width passed, or None
+
+        Returns:
+            a pretty header
+
+        This is harder than it seems, because Python's center() doesn't allow for multi-character strings,
+        so we get to build our own.
         """
-        # return f"----- {message} -----"
+        width = width or self.client_width() or 80
+        pattern = "|h|x=|h|b=|n"
+        border = self.style_border_repeats(pattern, width)
+
+        if text:
+            text = ansi.ANSIString(f"|n|h< {text} >|n")
+            border = self.insert_text_centered(border, text)
+
+        return border
+
+    def styled_footer(self, text=None, width=None):
+        width = width or self.client_width() or 80
+        pattern = "|h|b=|h|x=|n"
+        border = self.style_border_repeats(pattern, width)
+
+        if text:
+            text = ansi.ANSIString(f"|n|h< {text} >|n")
+            border = self.insert_text_right_just(border, text, 4)
+
+        return border
+
+    def styled_divider(self, text=None, width=None):
+        width = width or self.client_width() or 80
+        pattern = "|h|x-|h|b-|n"
+        border = self.style_border_repeats(pattern, width)
+
+        if text:
+            text = ansi.ANSIString(f"|x|h|| |n{text} |x|h|||n")
+            border = self.insert_text_centered(border, text)
+
+        return border
+
+    # -----------------
+    # support functions
+    # -----------------
+
+    def style_border_repeats(self, pattern, width):
+        """
+        Take some text and return it exactly to width.
+        e.g.,
+            -=-=-=-=-=-=-=-=-=-=-=-=-=
+        Args:
+            pattern: the pattern that's going to be repeated
+            width: width, usually of the client screen
+
+        Returns:
+            a border line that is exactly 'width' wide
+        """
+
+        style_pattern = ansi.ANSIString(pattern)
+        style_width = len(style_pattern)
+        # +1 to assure that substring always shortens.
+        # See Issue #2030: https://github.com/evennia/evennia/issues/2030
+        # Remove the +1 when issue is resolved.
+        border = style_pattern * (math.ceil(width / style_width) + 1)
+
+        # clip pattern to 'width'
+        return border[0:width]
+
+    def style_border_mirrors(self, pattern, width):
+        """
+        e.g.,
+            -=>-=>-=> <=-<=-<=-
+            -=<>-=<>-=<> <>=-<>=-<>=-
+
+        Args:
+            pattern: pattern to output, then mirror
+            width: width
+
+        Returns:
+            border_left: the pattern repeated
+            border_right: border_left reversed
+        """
         pass
-        # if "mode" not in kwargs:
-        #     kwargs["mode"] = "separator"
-        # return self._render_decoration(*args, **kwargs)
+
+    def insert_text_centered(self, border, text):
+        """
+        Take a completed border and jam the text centered in the middle of it.
+        This preserves the border's
+        Args:
+            border: the horizontal border to insert text into
+            text: the text to insert
+
+        Returns:
+            new border
+
+        """
+        text_width = len(text)
+        width = len(border)
+
+        # centered
+        len_left = math.floor((width - text_width) / 2)
+        len_right = len_left + text_width
+
+        border_left = border[0:len_left]
+        border_right = border[len_right:width]
+
+        return border_left + text + border_right
+
+    def insert_text_right_just(self, border, text, offset=0):
+        """
+        e.g.,
+            ----------------------< text >--
+        Args:
+            border: rendered border
+            text: text to insert
+            offset: how many characters to leave on the right
+
+        Returns:
+            new border
+
+        """
+        text_width = len(text)
+        width = len(border)
+
+        len_left = width - text_width - offset
+        len_right = -offset
+
+        border_left = border[0:len_left]
+        border_right = border[len_right:width]
+
+        return border_left + text + border_right
+
+    def insert_text_left_just(self, border, text, offset=0):
+        """
+        e.g.,
+            --< text >----------------------
+        Args:
+            border:
+            text:
+            offset: how many characters to leave on the left
+
+        Returns:
+
+        """
+        text_width = len(text)
+        width = len(border)
+
+        len_left = -offset
+        len_right = width - text_width - offset
+
+        border_left = border[0:len_left]
+        border_right = border[len_right:width]
+
+        return border_left + text + border_right
