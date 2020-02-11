@@ -1,0 +1,545 @@
+# let's see if we can add conditions & tilts to django
+#  cd SacredSeed/world
+#  evennia startapp myapp
+
+from django.db import models
+
+
+class CommonInfo(models.Model):
+    """
+    A simple model with most of the information for both Conditions and Tilts
+
+    From <https://github.com/evennia/evennia/wiki/New-Models>:
+    The db_date_created field, with exactly this name, is required
+    if you want to be able to store instances of your custom model
+    in an Evennia Attribute.
+    (And we do.)
+    """
+    db_name = models.CharField('name', max_length=80, db_index=True)
+    db_date_created = models.DateTimeField('date created', editable=False,
+                                           auto_now_add=True, db_index=True)
+    db_desc = models.TextField('description')  # null & blank default False
+    db_cause = models.CharField('cause', max_length=80)
+    db_resolution = models.CharField('resolution', max_length=80)
+    db_beat = models.CharField('beat', max_length=80)
+    db_reference = models.CharField('page references', max_length=80)
+
+    class Meta:
+        abstract = True  # this isn't used directly
+        ordering = ['-db_name']
+
+
+class Condition(CommonInfo):
+    """
+    Expands the generic ConditionsAndTilts for Condition-specific stuff
+    """
+    persistent_choices = [
+        (0, "Not Persistent"),
+        (1, "Persistent"),
+        (2, "Can Be Persistent")
+    ]
+    db_persistence = models.IntegerField('persistent capability', choices=persistent_choices, default=0)
+
+    class Meta:
+        verbose_name_plural = 'conditions'  # not needed, but sometimes we learn by being redundant
+
+
+class Tilt(CommonInfo):
+    """
+    Expands the generic CommonInfo for Tilt-specific stuff
+    Adds nothing special.
+    """
+
+    pass
+
+
+# -=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=---==-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--
+# Or use JSON? YAML? The data flow won't be so huge that we need to worry about using a DB.
+
+# json structure, manually messing with the dressin':
+
+import json
+
+json_conditions = {
+    "information": "Conditions for Chronicles of Darkness.",
+    "book": {
+        "CoD": "Chronicles of Darkness",
+        "CoD:HL": "Hurt Locker",
+        "VtM": "Vampire the Masquerade",
+        "WtF": "Werewolf the Foresaken",
+        "MtA": "Mage the Awakening",
+        "CtL": "Changeling the Lost"
+    },
+    "persistent": {
+        "0": "No",
+        "1": "Yes",
+        "2": "Maybe"
+    },
+    "conditions": {
+        "Amnesia": {
+            "persistent": 1,
+            "description": {
+                "CoD": "Your character is missing a portion of her memory. \
+                    An entire period of her life is just gone. \
+                    This causes massive difficulties with friends and loved ones."
+            },
+            "cause": {
+                "CoD": "Physical or psychological trauma"
+            },
+            "resolve": {
+                "CoD": "You regain your memory and learn the truth. \
+                    Depending on the circumstances, this may constitute a breaking point \
+                    at a level determined by the Storyteller."
+            },
+            "beat": {
+                "CoD": "Something problematic arises, such as a forgotten arrest warrant or old enemy."
+            },
+            "reference": {
+                "CoD": 288
+            }
+        },
+        "Blind": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character cannot see. \
+                    Any rolls requiring sight may only use a chance die. \
+                    If another sense can be reasonably substituted, make the roll at 3 instead. \
+                    In a combat situation, she suffers the drawbacks of the Blinded Tilt (see p. 208). \
+                    This Condition may be temporary, but that is usually the result of a combat effect, \
+                    in which case the Blindness Tilt would apply."
+            },
+            "cause": {
+                "CoD": None
+            },
+            "resolve": {
+                "CoD": "Your character regains her sight."
+            },
+            "beat": {
+                "CoD": "Your character encounters a limitation or difficulty that inconveniences her."
+            },
+            "reference": {
+                "CoD": 288
+            }
+        },
+        "Broken": {
+            "persistent": 1,
+            "description": {
+                "CoD": "Whatever you did or saw, something inside you snapped. \
+                    You can barely muster up the will to do your job anymore, and anything more emotionally \
+                    intense than a raised voice makes you flinch and back down. Apply a 2 die penalty to all \
+                    Social rolls and rolls involving Resolve, and a 5 die penalty to all use of the \
+                    Intimidation Skill."
+            },
+            "cause": {
+                "CoD": "Tremendous psychological trauma."
+            },
+            "resolve": {
+                "CoD": "Regain a dot of Integrity, lose another dot of Integrity, or achieve an exceptional \
+                success on a breaking point."
+            },
+            "beat": {
+                "CoD": "You back down from a confrontation or fail a roll due to this Condition."
+            },
+            "reference": {
+                "CoD": 288
+            }
+        },
+        "Bonded": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character has established an extensive bond with a specific animal. \
+                    She gains +2 on any rolls to influence or persuade her bonded animal. \
+                    It may add your Animal Ken to any rolls to resist coercion or fear when \
+                    in your characters presence. The animal may add your characters Animal Ken to \
+                    any one die roll. "
+            },
+            "cause": {
+                "CoD": None
+            },
+            "resolve": {
+                "CoD": "The bonded animal dies or is otherwise parted from the character."
+            },
+            "beat": {
+                "CoD": None
+            },
+            "reference": {
+                "CoD": 288
+            }
+        },
+        "Connected": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character has made inroads with a specified group. \
+                    While she has this Condition, she gets a +2 to all rolls relating to that group. \
+                    Alternately, she can shed this Condition to gain a one-time automatic exceptional success \
+                    on the next roll to influence or otherwise take advantage of the group. \
+                    Once Connected is resolved, the character is considered to have burned her bridges and is \
+                    no longer an accepted member. The character may be able to regain Connected with the specified \
+                    group per Storyteller approval."
+            },
+            "cause": {
+                "CoD": "Politics, Socialize"
+            },
+            "resolve": {
+                "CoD": "The character loses her membership or otherwise loses her standing with the group."
+            },
+            "beat": {
+                "CoD": "The character is asked to perform a favor for the group that inconveniences her."
+            },
+            "reference": {
+                "CoD": 288
+            }
+        },
+        "Crippled": {
+            "persistent": 1,
+            "description": {
+                "CoD": "Your character has limited or no ability to walk. Her Speed trait is effectively 1. \
+                    She must rely on a wheelchair or other device to travel. A manual wheelchair’s Speed \
+                    is equal to your character’s Strength, and requires use of her hands. \
+                    Electric wheelchairs have a Speed of 3, but allow the character free use of her hands."
+            },
+            "cause": {
+                "CoD": "An injury can cause this Condition temporarily, in which case it is resolved when \
+                    the injury heals and the character regains mobility."
+            },
+            "resolve": {
+                "CoD": "Danger or severe inhibition due to the disability."
+            },
+            "beat": {
+                "CoD": None
+            },
+            "reference": {
+                "CoD": 288
+            }
+        },
+        "Deprived": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character suffers from an addiction. She is unable to get her fix, however, \
+                    leaving her irritable, anxious, and unable to focus. Remove one from her Stamina, Resolve, \
+                    and Composure dice pools. This does not influence derived traits; it only influences \
+                    dice pools that use these Attributes."
+            },
+            "cause": {
+                "CoD": "Your character is Addicted but cannot get a fix."
+            },
+            "resolve": {
+                "CoD": "Your character indulges her addiction."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": "288-9"
+            }
+        },
+        "Embarrassing Secret": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character has a secret from his past that could come back to haunt him. \
+                    If this secret gets out, he could be ostracized or maybe even arrested. If it becomes known, \
+                    this Condition is exchanged for Notoriety (p. 183)."
+            },
+            "cause": None,
+            "resolve": {
+                "CoD": "The characters secret is made public, or the character does whatever is necessary \
+                    to make sure it never comes to light."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": 289
+            }
+        },
+        "Fugue": {
+            "persistent": 1,
+            "description": {
+                "CoD": "Something terrible happened. Rather than deal with it or let it break you, your mind \
+                    shuts it out. You are prone to blackouts and lost time. Whenever circumstances become too \
+                    similar to the situation that led to the character gaining this Condition, \
+                    the player rolls Resolve + Composure. If you fail the roll, the Storyteller controls \
+                    your character for the next scene; your character, left to his own devices, will seek to avoid \
+                    the conflict and get away from the area."
+            },
+            "cause": {
+                "CoD": "Psychological trauma, encountering a breaking point, some Ghoul Merits."
+            },
+            "resolve": {
+                "CoD": "Regain a dot of Integrity, lose another dot of Integrity, or achieve an \
+                    exceptional success on a breaking point. (Or racial equivalent of these.)"
+            },
+            "beat": {
+                "CoD": "You enter a fugue state as described above."
+            },
+            "reference": {
+                "CoD": 289
+            }
+        },
+        "Guilty": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character is experiencing deep-seated feelings of guilt and remorse. \
+                    This Condition is commonly applied after a successful detachment roll, p. 108. \
+                    While the character is under the effects of this Condition, he receives a 2 die penalty \
+                    to any Resolve or Composure rolls to defend against Subterfuge, Empathy, or Intimidation rolls."
+            },
+            "cause": {
+                "CoD": "Encountering a breaking point, some Ghoul Merits."
+            },
+            "resolve": {
+                "CoD": "The character confesses his crimes and makes restitution for whatever he did."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": 289
+            }
+        },
+        "Informed": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character has a breadth of research information based on the topic she investigated. \
+                    When you make a roll relating to the topic, you may choose to resolve this Condition. \
+                    If you resolve it and the roll failed, it is instead considered to have a single success. \
+                    If it succeeded, the roll is considered an exceptional success. The roll that benefits from \
+                    the Informed Condition can be any relevant Skill roll. For example, a character with \
+                    Informed (Werewolves) might gain its benefits when using researched information to build a \
+                    silver bear trap with the Crafts Skill. Combat rolls cannot benefit from this Condition."
+            },
+            "cause": {
+                "CoD": "Academics, Investigation, Occult, Science"
+            },
+            "resolve": {
+                "CoD": "Your character uses her research to gain information; the Condition is resolved \
+                    as described above."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": 289
+            }
+        },
+        "Inspired": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character is deeply inspired. When your character takes an action pertaining to \
+                    that inspiration, you may resolve this Condition. An exceptional success on that roll requires \
+                    only three successes instead of five and you gain a point of Willpower."
+            },
+            "cause": {
+                "CoD": "Exceptional success with Crafts or Expression, the Inspiring Merit, the Auspex Discipline."
+            },
+            "resolve": {
+                "CoD": "You spend inspiration to spur yourself to greater success, resolving the Condition \
+                    as described above."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": 289
+            }
+        },
+        "Leveraged": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character has been blackmailed, tricked, convinced, or otherwise leveraged \
+                    into doing what another character wishes. You may have the Leveraged Condition multiple times \
+                    for different characters. Any time the specified character requests something of you, \
+                    you may resolve this Condition if your character does as requested without rolling to resist."
+            },
+            "cause": {
+                "CoD": "Empathy, Persuasion, Subterfuge"
+            },
+            "resolve": {
+                "CoD": "Your character may either resolve the Condition by complying with a request as above, \
+                    or if you apply the Leveraged condition to the specified character."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": 289
+            }
+        },
+        "Lost": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character has no idea where she is or how to reach her target. \
+                    Characters with the Lost Condition remove one die from their Composure dice pools. \
+                    This does not influence derived traits; it only influences dice pools that use these \
+                    Attributes. A Lost character cannot make any headway toward her goal without first navigating \
+                    and finding her place. This requires a successful Wits + Streetwise action (in the city) or \
+                    Wits + Survival action (in the wilderness)."
+            },
+            "cause": None,
+            "resolve": {
+                "CoD": "Your character gives up on reaching her intended destination, \
+                    or she successfully navigates as described above."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": 289
+            }
+        },
+        "Madness": {
+            "persistent": 1,
+            "description": {
+                "CoD": "Your character saw or did something that jarred her loose from reality. \
+                    This isn't a mental illness born of brain chemistry that, at least, might be treatable. \
+                    This madness is the product of supernatural tampering or witnessing something that humanity \
+                    was never meant to comprehend. The Storyteller has a pool of dice equal to \
+                    10 - (character's Integrity). Once per chapter, the Storyteller can apply those dice as \
+                    a negative modifier to any Mental or Social roll made for the character."
+            },
+            "cause": None,
+            "resolve": {
+                "CoD": "Regain a dot of Integrity, lose another dot of Integrity, or achieve an exceptional \
+                    success on a breaking point. (Or racial equivalent of these.)"
+            },
+            "beat": {
+                "CoD": "The character fails a roll because of this Condition."
+            },
+            "reference": {
+                "CoD": 289
+            }
+        },
+        "Mute": {
+            "persistent": 1,
+            "description": {
+                "CoD": "Your character cannot speak. Any communication must be done through writing, gestures, \
+                    or hand signs. Illness, injury, or supernatural powers can inflict this Condition \
+                    on a temporary basis."
+            },
+            "cause": None,
+            "resolve": {
+                "CoD": "The character regains her voice through mundane or supernatural means."
+            },
+            "beat": {
+                "CoD": "Your character suffers a limitation or communication difficulty \
+                    that heightens immediate danger."
+            },
+            "reference": {
+                "CoD": 290
+            }
+        },
+        "Notoriety": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Whether or not your character actually did something heinous in the past, \
+                    the wrong people think he did and now hes ostracized by the general public. \
+                    Your character suffers a 2 on any Social rolls against those who know of his notoriety. \
+                    If using Social maneuvering (p. 188), the character must open one extra Door \
+                    if his target knows of his notoriety."
+            },
+            "cause": {
+                "CoD": "Subterfuge, Socialize"
+            },
+            "resolve": {
+                "CoD": "The story is debunked or the characters name is cleared."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": 290
+            }
+        },
+        "Obsession": {
+            "persistent": 1,
+            "description": {
+                "CoD": "Somethings on your characters mind and she just cant shake it. \
+                    She gains the 9-again quality on all rolls related to pursuing her obsession. \
+                    On rolls that are unrelated to her obsession, she loses the 10-again quality. \
+                    Obsession can be a temporary quality per Storyteller approval."
+            },
+            "cause": {
+                "CoD": "The Acute Senses Merit."
+            },
+            "resolve": {
+                "CoD": "The character sheds or purges her fixation."
+            },
+            "beat": {
+                "CoD": "Character fails to fulfill an obligation due to pursuing her obligation."
+            },
+            "reference": {
+                "CoD": 290
+            }
+        },
+        "Shaken": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Something has severely frightened your character. \
+                Any time your character is taking an action where that fear might hinder her, \
+                you may opt to fail the roll and resolve this Condition."
+            },
+            "cause": {
+                "CoD": "Facing a Breaking Point."
+            },
+            "resolve": {
+                "CoD": "The character gives into her fear and fails a roll as described above."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": 290
+            }
+        },
+        "Spooked": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character has seen something supernatural not overt enough to terrify her, \
+                    but unmistakably otherworldly. How your character responds to this is up to you, \
+                    but it captivates her and dominates her focus."
+            },
+            "cause": {
+                "CoD": "The Unseen Sense Merit, the Wet Dream Devotion."
+            },
+            "resolve": {
+                "CoD": "This Condition is resolved when your characters fear and fascination causes her \
+                    to do something that hinders the group or complicates things (she goes off alone to investigate \
+                    a strange noise, stays up all night researching, runs away instead of holding her ground, etc.)."
+            },
+            "beat": None,
+            "reference": {
+                "VtM": 306
+            }
+        },
+        "Steadfast": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character is confident and resolved. \
+                    When youve failed a roll, you may choose to resolve this Condition to instead treat the action \
+                    as if youd rolled a single success. If the roll is a chance die, you may choose to resolve \
+                    this Condition and roll a single regular die instead."
+            },
+            "cause": {
+                "CoD": "Encountering a breaking point"
+            },
+            "resolve": {
+                "CoD": "Your characters confidence carries him through and the worst is avoided; \
+                    the Condition is resolved as described above."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": "290-1"
+            }
+        },
+        "Swooned": {
+            "persistent": 0,
+            "description": {
+                "CoD": "Your character is attracted to someone and is vulnerable where they are concerned. \
+                    He may have the proverbial butterflies in his stomach or just be constantly aware of the \
+                    object of his affection. A character may have multiple instances of this Condition, \
+                    reflecting affection for multiple characters. He suffers a 2 die penalty to any rolls that \
+                    would adversely affect the specified character, who also gains +2 die bonus on any Social \
+                    rolls against him. If the specified character is attempting Social maneuvering on the \
+                    Swooned character, the impression level is considered one higher \
+                    (maximum of perfect; see CoD p. 81)."
+            },
+            "cause": {
+                "CoD": "Be on the receiving end of an exceptional success of a Persuasion or Subterfuge roll, \
+                    dramatic failure on using the Majesty Discipline, fed on non-violently by a vampire, \
+                    have another character help you fulfill your Vice (if mortal)."
+            },
+            "resolve": {
+                "CoD": "Your character does something for his love interest that puts him in danger, \
+                    or he opts to fail a roll to resist a Social action by the specified character."
+            },
+            "beat": None,
+            "reference": {
+                "CoD": 291
+            }
+        }
+    }
+}
+
+dumped_conditions = json.dumps(json_conditions, indent=4)
