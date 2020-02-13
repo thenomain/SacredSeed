@@ -543,3 +543,19 @@ json_conditions = {
 }
 
 dumped_conditions = json.dumps(json_conditions, indent=4)
+
+
+# -=-=-=-=-=-=-=-=-=-=-=-=-=
+# How about as a dictionary?
+# -==--=-=-=-=-=-=-=-=-=-=-=
+
+dict_conditions = dict(
+    {'Amnesia': {'persistent': 0,
+                 'description': {'CoD': 'Blah blah blah'},
+                 'cause': {'CoD': 'More information etc. etc.'},
+                 'resolve': {'CoD': '...'},
+                 'beat': {'CoD': '...'},
+                 'reference': {'CoD': '291'}
+                 }
+     }
+)
