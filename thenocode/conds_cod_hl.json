@@ -1,0 +1,157 @@
+{
+    "information": "Conditions from Chronicles of Darkness:Hurt Locker.",
+    "book": {
+        "CoD:HL": "Hurt Locker"
+    },
+    "persistent": {
+        "0": "No",
+        "1": "Yes",
+        "2": "Maybe"
+    },
+    "conditions": {
+        "Missing Time": {
+            "persistent": 1,
+            "description": {
+                "CoD:HL": "DREAMER: ...\nIf the Storyteller succeeds three times then in their fugue the character has successfully carried out their mission. Resolve Missing Time and replace the Condition with the Endgame Condition."
+            },
+            "cause": {
+                "CoD:HL": "Character is a Dreamer."
+            },
+            "resolve": {
+                "CoD:HL": "The character achieves an exceptional success on a breaking point. The character reaffirms her own identity as an individual instead of an asset (such as fulfilling an Aspiration). The Condition activates three times (and is replaced with the Endgame Condition)."
+            },
+            "beat": {
+                "CoD:HL": "You wake up to see what actions you have wrought."
+            },
+            "reference": {
+                "CoD:HL": "83"
+            }
+        },
+        "Endgame": {
+            "persistent": 1,
+            "description": {
+                "CoD:HL": "DREAMER: Character has laid the groundwork and her mission parameters are nearing final execution. This is her last chance to stop committing an atrocity. In hours her programming will be activated and her sole motivation will be the completion of her objectives, known to the character or not. All rolls to complete the mission have the 8-again quality."
+            },
+            "cause": {
+                "CoD:HL": "Character is a Dreamer."
+            },
+            "resolve": {
+                "CoD:HL": "The character somehow prevents her final activation or destroys the chances of her mission. Resisting conditioning takes an extended test of Resolve + Composure opposed by the relevant dice pool for each step of their mission. Also resolved if the mission is completed. Your patrons will be in touch."
+            },
+            "beat": {
+                "CoD:HL": null
+            },
+            "reference": {
+                "CoD:HL": "83"
+            }
+        },
+        "Fixated": {
+            "persistent": 0,
+            "description": {
+                "CoD:HL": "Your character focuses on a single thought or command. She takes a -2 penalty to all actions for the rest of the scene or until the command is completed. If the command is not something she could conceivably do in that time and place then the effect lasts one turn as her mind wanders in aimless confusion. Multiple applications of this Condition on her in the same scene can add more commands, but the penalty is not cumulative."
+            },
+            "cause": {
+                "CoD:HL": null
+            },
+            "resolve": {
+                "CoD:HL": "Your Character satisfies the command."
+            },
+            "beat": {
+                "CoD:HL": "Your character does something that goes against her Virtual to fulfill the fixation."
+            },
+            "reference": {
+                "CoD:HL": "150"
+            }
+        },
+        "Hunted": {
+            "persistent": 1,
+            "description": {
+                "CoD:HL": "Someone who poses a serious threat to the character's safety and well-being, physically or emotionally or both, is after her. They may be intent on direct violence, or simply wish to torment her."
+            },
+            "cause": {
+                "CoD:HL": null
+            },
+            "resolve": {
+                "CoD:HL": "The character stops the persecutors."
+            },
+            "beat": {
+                "CoD:HL": "The character's persecutors find her."
+            },
+            "reference": {
+                "CoD:HL": "150"
+            }
+        },
+        "Lethargic": {
+            "persistent": 0,
+            "description": {
+                "CoD:HL": "Your character is drained and lethargic, feeling the weight of sleeplessness. With this Condition, your character cannot spend Willpower. As well, every six hours he goes without sleeping, take a cumulative -1 die penalty to all actions. At every six-hour interval, make a Stamina + Resolve test (with penalty) to resist falling asleep until the next sun sets."
+            },
+            "cause": {
+                "CoD:HL": "Psychic vampire fighting sleep."
+            },
+            "resolve": {
+                "CoD:HL": null
+            },
+            "beat": {
+                "CoD:HL": null
+            },
+            "reference": {
+                "CoD:HL": "150"
+            }
+        },
+        "Oblivious": {
+            "persistent": 0,
+            "description": {
+                "CoD:HL": null
+            },
+            "cause": {
+                "CoD:HL": null
+            },
+            "resolve": {
+                "CoD:HL": null
+            },
+            "beat": {
+                "CoD:HL": null
+            },
+            "reference": {
+                "CoD:HL": "150"
+            }
+        },
+        "Reluctant Aggressor": {
+            "persistent": 0,
+            "description": {
+                "CoD:HL": null
+            },
+            "cause": {
+                "CoD:HL": "Peacemaker merit (CoD:HL p.42)"
+            },
+            "resolve": {
+                "CoD:HL": "The character doesn't encounter her victim or associates for a chapter, or the victim is the aggressor in targeting the character, her friends, or allies. If the Condition fades after a chapter it does not award a Beat."
+            },
+            "beat": {
+                "CoD:HL": null
+            },
+            "reference": {
+                "CoD:HL": "150"
+            }
+        },
+        "Surveilled": {
+            "persistent": 0,
+            "description": {
+                "CoD:HL": "The character is being watched in a not-so-subtle way. She may expect to see unusual vehicles parked near her home or place of work, her garbage to be rifled through, or even for her home to be broken into. At the beginning of each Chapter, the Storyteller should roll a pool of dice equal to the successes on the roll that created this condition. (ed: ???) Once ten successes are accrued, this Condition resolves."
+            },
+            "cause": {
+                "CoD:HL": null
+            },
+            "resolve": {
+                "CoD:HL": "The Storyteller reaches 10 successes or the character somehow exposes or otherwise actively stops the surveillance. If she is being surveilled by the state, she may need to exercise legal options. If any exist."
+            },
+            "beat": {
+                "CoD:HL": null
+            },
+            "reference": {
+                "CoD:HL": "150"
+            }
+        }
+    }
+}

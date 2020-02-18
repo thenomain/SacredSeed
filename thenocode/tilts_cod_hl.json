@@ -1,0 +1,64 @@
+{
+    "information": "Tilts from Chronicles of Darkness:Hurt Locker.",
+    "book": {
+        "CoD:HL": "Hurt Locker"
+    },
+   "tilts": {
+        "bleeding": {
+            "effect": {
+                "CoD:HL": null
+            },
+            "cause": {
+                "CoD:HL": ""
+            },
+            "resolve": {
+                "CoD:HL": ""
+            },
+            "reference": {
+                "CoD:HL": "143"
+            }
+        },
+        "burning": {
+            "effect": {
+                "CoD:HL": null
+            },
+            "cause": {
+                "CoD:HL": ""
+            },
+            "resolve": {
+                "CoD:HL": ""
+            },
+            "reference": {
+                "CoD:HL": "143"
+            }
+        },
+        "pierced armor": {
+            "effect": {
+                "CoD:HL": null
+            },
+            "cause": {
+                "CoD:HL": ""
+            },
+            "resolve": {
+                "CoD:HL": ""
+            },
+            "reference": {
+                "CoD:HL": "143"
+            }
+        },
+        "pinned": {
+            "effect": {
+                "CoD:HL": null
+            },
+            "cause": {
+                "CoD:HL": ""
+            },
+            "resolve": {
+                "CoD:HL": ""
+            },
+            "reference": {
+                "CoD:HL": "143"
+            }
+        }
+    }
+}
