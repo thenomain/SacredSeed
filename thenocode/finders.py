@@ -14,6 +14,7 @@ def build_targets_list(self, targets_string, include_disconnected=True):
     """
 
     caller = self.caller
+    here = caller.location
 
     if "," in targets_string:
         delimiter = ","
@@ -25,22 +26,18 @@ def build_targets_list(self, targets_string, include_disconnected=True):
 
     for t in targets_list:
         found = caller.search(t)
-        if (found is not None) and (found not in targets):
+        if (found is not None) and (found not in targets):  # for each target that is not already in targets...
             if not include_disconnected:
-                if (not found.is_connected) and (not found == caller.location):
+                if (not found.is_connected) and (not found == here):
                     caller.msg(f"'{found}' is not connected.")
                 else:
                     targets.append(found)
+            # shouldn't there be an 'else: targets.append(found)' here?
 
-        # for t in targets[:]:  # make a temporary copy of 'targets' to iterate over, because of remove()
-                # if (not t.is_connected) and (not t == caller.location):
-                # caller.msg(f"'{t}' is not connected.")
-                # targets.remove(t)
-
-    if (caller.location not in targets) and (caller not in targets):
+    if (here not in targets) and (caller not in targets):
         targets += [caller]
 
-    if (caller.location in targets) and (len(targets) > 1):
-        targets = [target for target in targets if target not in caller.location.contents]
+    if (here in targets) and (len(targets) > 1):
+        targets = [target for target in targets if target not in here.contents]
 
     return targets
