@@ -1,0 +1,519 @@
+{
+	"information": "Tilts from Chronicles of Darkness.",
+	"book": {
+		"CoD": "Chronicles of Darkness"
+	},
+	"structure": {
+		"type": "Type of Tilt.",
+		"description": "Description.",
+		"effect": "Effects and basic mechanics.",
+		"summary": "Mechanics summary of effect.",
+		"cause": "What can cause this.",
+		"resolve": "What can end this.",
+		"reference": "Page number(s)."
+	},
+	"tilts": {
+
+		"Arm Wrack": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "Your arm burns with pain and then goes numb. It could be dislocated, sprained, or broken, but whatever’s wrong with it means you can’t move your limb."
+			},
+			"effect": {
+				"CoD": "If your arm’s broken or otherwise busted, you drop whatever you’re holding in that arm and can’t use it to attack opponents — unless you’ve got the Ambidextrous Merit, you suffer off-hand penalties for any rolls that require manual dexterity. If this effect spreads to both limbs, you’re down to a chance die on any rolls that require manual dexterity, and -3 to all other Physical actions."
+			},
+			"summary": {
+				"CoD": "One arm: Drop anything held, suffer off-hand penalties for most rolls. Both arms: Chance die on rolls requiring manual dexterity, −3 to other Physical actions."
+			},
+			"cause": {
+				"CoD": "Some supernatural powers can cripple a victim’s limbs or break bones with a touch. A character can have his arm knocked out by a targeted blow to the arm (-2 penalty) that deals more damage than the character’s Stamina. A targeted blow to the hand inflicts this Tilt if it does any damage."
+			},
+			"resolve": {
+				"CoD": "If the Tilt is inflicted as a result of an attack, mark an X under the leftmost Health box affected by that attack. The Tilt ends when the damage that caused it has healed. If the damage that inflicts this Tilt is aggravated, the character loses the use of his arm (or completely loses his arm) permanently."
+			},
+			"reference": {
+				"CoD": "280"
+			}
+		},
+
+		"Beaten Down": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "The character has had the fight knocked out of him."
+			},
+			"effect": {
+				"CoD": "The character cannot take active part in the fight without extra effort. The player must spend a point of Willpower each time he wants the character to take a violent action in the fight. He can still run, Dodge, and apply Defense. If he wishes to take another action, the Storyteller should judge whether the action is aggressive enough to require the expenditure."
+			},
+			"summary": {
+				"CoD": "Cannot take violent action in combat without spending Willpower."
+			},
+			"cause": {
+				"CoD": "The character suffers bashing damage in excess of his Stamina or any amount of lethal damage."
+			},
+			"resolve": {
+				"CoD": "The character surrenders and gives the aggressor what he wants. At this point, the character regains a point of Willpower and takes a Beat, but can take no further action in the fight. If the aggressor’s intent is to kill or injure the character, obviously surrendering isn’t a good option."
+			},
+			"reference": {
+				"CoD": "280-1"
+			}
+		},
+
+		"Blinded": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "The character’s eyes are damaged or removed."
+			},
+			"effect": {
+				"CoD": "The character suffers a -3 penalty to any rolls that rely on vision — including attack rolls — and halves his Defense if one eye is blinded. That penalty increases to -5 and loss of all Defense if both eyes are affected."
+			},
+			"summary": {
+				"CoD": "One eye: -3 to vision-related rolls. Both eyes: -5 to vision-related rolls; lose all Defense."
+			},
+			"cause": {
+				"CoD": "The normal way to inflict the Tilt is to deal damage to the target’s eyes, a specified attack with a -5 penalty (see Specified Targets, CoD p. 92). A successful attack normally damages one eye. It takes an exceptional success to totally blind an attacker. An attacker can inflict temporary blindness by slashing at her opponent’s brow, throwing sand into his eyes, or kicking up dirt. This requires an attack roll of Dexterity + Athletics with a -3 penalty, and the victim’s Defense applies to this attack. If it succeeds, the target is Blinded for the next turn."
+			},
+			"resolve": {
+				"CoD": "If an attack against the character’s eye does any points of damage, mark an X under the leftmost Health box affected by that attack. If the damage inflicted is aggravated the character loses vision in that eye permanently. Otherwise, the condition ends when the damage that caused the Tilt is healed."
+			},
+			"reference": {
+				"CoD": "281"
+			}
+		},
+
+		"Blizzard": {
+			"type": {
+				"CoD": "Environmental"
+			},
+			"description": {
+				"CoD": "Heavy snowfall carpets the ground and is whipped up by howling winds into a barrage of whirling white."
+			},
+			"effect": {
+				"CoD": "Blizzards make it very hard to see for any real dis- tance. Rolls to see things close to the character’s person, out to an arm’s length away, suffer a -1 penalty. Each additional 10 yards inflicts an additional -1 penalty (cumulative) on all visual Perception rolls. This penalty also applies to ranged attack rolls. Moving through snow is difficult. Every four inches of snow applies a -1 penalty to appropriate Physical rolls, including combat rolls, Athletics, and the like. The Blizzard Tilt rarely applies by itself — the Storyteller may also inflict any or all of the Extreme Cold, Heavy Winds, or Ice Tilts."
+			},
+			"summary": {
+				"CoD": "-1 penalty to visual Perception and ranged attack rolls, increased by 1 per 10 yards. -1 penalty to Physical rolls per four inches of snow."
+			},
+			"cause": {
+				"CoD": "For the most part, the weather is out of the characters’ control; the Storyteller should telegraph an incoming blizzard before it hits, but it’s ultimately up to her. Some supernatural powers might grant a character the power to create a blizzard."
+			},
+			"resolve": {
+				"CoD": "Without supernatural powers, characters can’t end a blizzard. The best they can manage is to escape the weather or wait for it to stop. Proper equipment (such as goggles and snow boots) can add +1 to +3 to a roll, offsetting some of the penalties. If someone is causing this Tilt through a supernatural power, it’s possible that the characters could disrupt his concentration."
+			},
+			"reference": {
+				"CoD": "281"
+			}
+		},
+
+		"Deafened": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "The character can’t hear. Maybe he’s suffer- ing intense tinnitus, can only hear the roaring of blood in his ears, or has been deafened by a gunshot."
+			},
+			"effect": {
+				"CoD": "If the character is deaf in one ear, he suffers a -3 penalty to hearing-based Perception rolls. A character who is struck deaf in both ears only gets a chance die on hearing- based Perception rolls, and suffers a -2 penalty to all combat- related dice rolls — suddenly losing the ability to hear the people around you is tremendously disorienting."
+			},
+			"summary": {
+				"CoD": "One ear: -3 Perception rolls. Both ears: Chance die on Perception rolls, -2 to combat rolls."
+			},
+			"cause": {
+				"CoD": "A particularly loud noise within 10 feet of the character may cause temporary hearing loss, as though the character were deaf in both ears. Alternatively, a targeted attack on the ear — at a -4 penalty — can deafen a character. Supernatural creatures with heightened senses can be deafened by loud noises at greater distances."
+			},
+			"resolve": {
+				"CoD": "Deafness caused by loud noises fades after (10 - the victim’s Stamina + Resolve) turns. If an attack against the character’s ear does any points of damage, mark an X under the leftmost Health box affected by that attack. If the damage inflicted is Aggravated the character loses hearing in the ear permanently. Otherwise, the condition ends when the damage that caused the Tilt is healed."
+			},
+			"reference": {
+				"CoD": "281"
+			}
+		},
+
+		"Drugged": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "The character’s mind is addled by mind- altering substances, such as alcohol or drugs."
+			},
+			"effect": {
+				"CoD": "A generic narcotic can be represented with one set of modifiers; the character suffers a -2 modifier to Speed (and static Defense, if used) and a -3 penalty to all rolls in combat, including Defense and Perception. The character also ignores wound penalties."
+			},
+			"summary": {
+				"CoD": "-2 Speed, -3 to combat rolls (including Defense and Perception). Ignore wound penalties."
+			},
+			"cause": {
+				"CoD": "If the character has chosen to take drugs, he suffers their effects. To administer drugs to an- other character is a Dexterity + Weaponry attack, suffering a -1 modifier for the improvised weapon. If the drug has to go into a specific body part (such as an arm or mouth), it requires an attack against a specified target."
+			},
+			"resolve": {
+				"CoD": "A generic narcotic lasts for (10 – the victim’s Stamina + Resolve) hours. Medical help, such as pumping the victim’s stomach or flushing his system, halves this time."
+			},
+			"reference": {
+				"CoD": "281-2"
+			}
+		},
+
+		"Earthquake": {
+			"type": {
+				"CoD": "Environmental"
+			},
+			"description": {
+				"CoD": "Everything shudders and shakes, and rents tear the ground wide open."
+			},
+			"effect": {
+				"CoD": "Earthquakes don’t last long, but they don’t have to. When the earthquake’s actually occurring, all Dexterity-based dice pools (and Defense) suffer a -1 to -5 penalty, depending on the earthquake’s severity. Characters take between one and three points of lethal damage per turn of the earthquake’s duration, though a reflexive Stamina + Athletics roll can downgrade that damage to bashing — or cancel it entirely on an exceptional success."
+			},
+			"summary": {
+				"CoD": "Penalty to Dexterity rolls depending on severity. Take one to three lethal damage per turn, Stamina + Athletics downgrades to bashing."
+			},
+			"cause": {
+				"CoD": "Without tremendous supernatural power, it’s almost impossible to cause an earthquake. A character who detonates a powerful explosive underground might simulate the effects over a city block for a few seconds."
+			},
+			"resolve": {
+				"CoD": "Earthquakes are, fortunately, very quick events. It’s very rare for one to last more than a minute (20 turns), so waiting them out is the best course of action."
+			},
+			"reference": {
+				"CoD": "282"
+			}
+		},
+
+		"Extreme Cold": {
+			"type": {
+				"CoD": "Environmental (Usually)"
+			},
+			"description": {
+				"CoD": "Bone-chilling winds bite through the char- acter, or trudging through knee-deep snow takes all of the sensation from his limbs. Any time the temperature gets down below zero degrees Celsius (32 degrees Fahrenheit), a character can suffer from the cold’s effects. This Tilt can sometimes be personal, as a result of a medical condition like hypothermia or a supernatural power."
+			},
+			"effect": {
+				"CoD": "When the temperature is below freezing, characters can’t heal bashing damage — the extreme temperature deals dam- age at the same rate normal characters heal it (a cut might turn to frostbite, for instance). Supernatural beings and characters who heal faster than normal instead halve their normal healing rate. For every hour that a character is continuously affected by this Tilt, he accrues a -1 penalty to all rolls. When that penalty hits -5, he instead suffers a point of lethal damage per hour."
+			},
+			"summary": {
+				"CoD": "Bashing damage doesn’t heal. -1 penalty to all rolls, increasing by 1 per hour. At -5, further hours deal one point of lethal damage."
+			},
+			"cause": {
+				"CoD": "A character can suffer this Tilt from being in a frozen environment — whether he’s outside in the Arctic tundra or in a walk-in freezer. Inflicting the Tilt is reasonably straightforward: throw the victim into a freez- ing lake or lock him in a freezer for long enough, and he’ll develop hypothermia."
+			},
+			"resolve": {
+				"CoD": "The best way to escape the freezing cold is to find a source of warmth, either a building with working heat, or warm clothing. A character who has hypothermia requires medical attention."
+			},
+			"reference": {
+				"CoD": "282"
+			}
+		},
+
+		"Extreme Heat": {
+			"type": {
+				"CoD": "Environmental (Usually)"
+			},
+			"description": {
+				"CoD": "The character might be stumbling through the desert with the sun beating down on him, or running through the steam tunnels surrounding an old boiler room. This Tilt can also be personal, the result of a debilitating fever that spikes his temperature far above the norm. Extreme heat is normally anything above 40 degrees Celsius (104 degrees Fahrenheit), whether internal or external."
+			},
+			"effect": {
+				"CoD": "When the temperature is far above normal, char- acters can’t heal bashing damage — the extreme temperature deals damage at the same rate normal characters heal it (a cut might heal, but it’s replaced by sunburn or sunstroke). Supernatural beings and characters who heal faster than normal instead halve their normal healing rate. For every hour that a character is continuously affected by this Tilt, he accrues a -1 penalty to all rolls. When that penalty hits -5, he instead suffers a point of lethal damage per hour."
+			},
+			"summary": {
+				"CoD": "Bashing damage doesn’t heal. -1 penalty to all rolls, increasing by 1 per hour. At -5, further hours deal one point of lethal damage."
+			},
+			"cause": {
+				"CoD": "This Tilt is usually caused by environ- mental factors — being out at noon in the desert, or spend- ing too long in a sauna or forge. Even a fever is the result of an infection, rather than something that an opponent can force on a character. It’s possible to create this Tilt on a given character: securing someone to a chair right next to an old, inefficient boiler, or stranding them in the desert far from any shade."
+			},
+			"resolve": {
+				"CoD": "The key to ending this Tilt is simple: get out of the heat. In a desert or similar environment, finding shade is paramount. Elsewhere, the character needs to escape whatever is causing the abnormal temperatures."
+			},
+			"reference": {
+				"CoD": "282"
+			}
+		},
+
+		"Flooded": {
+			"type": {
+				"CoD": "Environmental"
+			},
+			"description": {
+				"CoD": "Some liquid — brackish water, mud, gore, or raw sewage — has risen enough to impede the character’s progress."
+			},
+			"effect": {
+				"CoD": "Each foot of liquid inflicts a -2 penalty to all Physical dice pools. If the water goes up over her head, the character has to swim (Dexterity + Athletics), with a penalty appropriate for the speed of the flooding. Alternatively, she can try to hold her breath (Stamina + Composure) if she cannot get her head above the rising waters."
+			},
+			"summary": {
+				"CoD": "-2 to Physical dice pools per foot of flooding. Once water is over head, character must swim or hold breath."
+			},
+			"cause": {
+				"CoD": "Normally, this Tilt is the result of heavy rain, sudden snowmelt, or a broken water main. Characters can cause this Tilt by smashing up a water heater, or blowing up a small dam. Some supernatural creatures may be able to call floods down onto a region."
+			},
+			"resolve": {
+				"CoD": "Characters can escape flooding by get- ting to high ground, which is enough to mitigate this Tilt. A long-term fix would require draining the floodwaters, but each flood requires its own solution."
+			},
+			"reference": {
+				"CoD": "282"
+			}
+		},
+
+		"Heavy Rain": {
+			"type": {
+				"CoD": "Environmental"
+			},
+			"description": {
+				"CoD": "Torrential rain lashes down in knives, bouncing high off the sidewalk. The sound of rain on the ground is a constant hammering rumble that goes on without end, like dropping ball bearings on a tin roof. Thick gray curtains of water obscure vision."
+			},
+			"effect": {
+				"CoD": "Heavy rains — approaching tropical storm levels or worse — cause a Perception penalty of -3 dice to both vision and hearing. Rain’s hard to see through, but it’s also loud. If the rains carry on for an hour or more, the Flooded Tilt will soon follow. This Tilt is often accompanied by Heavy Winds; a character trapped out in Heavy Rains might come under the effects of Extreme Cold."
+			},
+			"summary": {
+				"CoD": "-3 to aural and visual Perception rolls."
+			},
+			"cause": {
+				"CoD": "Short of a supernatural power or a fleet of cloud-seeding aircraft, Heavy Rain is the result of natural weather patterns."
+			},
+			"resolve": {
+				"CoD": "The best way out of the rain is to get indoors. Unless it’s the start of some sodden apocalypse, the characters can wait for the weather to ease."
+			},
+			"reference": {
+				"CoD": "283"
+			}
+		},
+
+		"Heavy Winds": {
+			"type": {
+				"CoD": "Environmental"
+			},
+			"description": {
+				"CoD": "Howling winds buffet at the characters, whipping street furniture into the air and tearing the roofs from buildings. Powerful winds can toss cars around like toys. Anyone out in the winds feels like they’re taking a beating just walking down the street."
+			},
+			"effect": {
+				"CoD": "Heavy winds are loud, so characters suffer a -3 modifier to aural Perception rolls. Also, the wind inflicts a penalty to all Physical rolls when out in the winds, includ- ing Drive rolls. Grade the wind from one to five; one is tropical-storm level (around 40 MPH), three is hurricane level (around 80 MPH), and five is tornado level (150+ MPH). The wind’s grade represents the penalty applied to Physical dice rolls. Characters outside in the maelstrom also take damage from flying debris, taking bashing dam- age each turn equal to the wind’s rating. Characters can make a reflexive Dexterity + Athletics roll to avoid damage."
+			},
+			"summary": {
+				"CoD": "-3 modifier to aural Perception rolls. Winds rated between 1 and 5, severity acts as penalty to Physical rolls and deals that much bashing damage per turn, Dexterity + Athletics to avoid."
+			},
+			"cause": {
+				"CoD": "Heavy winds are a fact of life, from siroccos in the desert, to tornados in the Midwest, to wind shears everywhere."
+			},
+			"resolve": {
+				"CoD": "Getting out of the wind is the best way to end this Tilt. Sometimes that’s as easy as sheltering in an automobile, as long as nobody tries to drive. Buildings provide more permanent shelter."
+			},
+			"reference": {
+				"CoD": "283"
+			}
+		},
+
+		"Ice": {
+			"type": {
+				"CoD": "Environmental"
+			},
+			"description": {
+				"CoD": "The ground’s covered in a mirror-smooth layer of ice that sends wheels spinning and people’s feet flying out from under them. The ice can be so thin as to be nearly invisible, or it can be a thick layer that’s the only thing keep- ing the characters from sinking into a frozen lake."
+			},
+			"effect": {
+				"CoD": "When a character can’t trust her footing, divide her Speed in half, and all Physical rolls (and Defense) suffer a -2 penalty. Attempting to move at full Speed increases the Physical penalty to -4. Any dramatic failure on a Physical roll inflicts the Knocked Down Tilt. Driving on ice is a real pain; halve Acceleration, and characters suffer a -5 penalty to Drive rolls."
+			},
+			"summary": {
+				"CoD": "-2 Speed, -2 to Physical actions. Can move at normal speed but -4 Physical actions. Dramatic Failure causes Knocked Down; Drive rolls are at -5 and half Acceleration."
+			},
+			"cause": {
+				"CoD": "This Tilt doesn’t just apply to icy conditions, but to any surface that’s slick and slippery, including a spill of industrial lubricant or just a well-polished wooden or linoleum floor. Characters can use a Dexterity + Crafts roll to cover an area in industrial cleaner or mix up chemicals into a lubricant. If the Extreme Cold Tilt is in effect, even covering the area with water will do the trick."
+			},
+			"resolve": {
+				"CoD": "“Get off the ice” is good advice, but that can take work. Characters can use heat or fire to melt ice, or throw down copious quantities of salt or grit to increase traction."
+			},
+			"reference": {
+				"CoD": "284"
+			}
+		},
+
+		"Immobilized": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "Something holds the character fast, prevent- ing him from moving. This could be a grappling opponent, a straightjacket wrapped with heavy chains, or a coffin secured on the outside with a padlock."
+			},
+			"effect": {
+				"CoD": "The character can’t do anything but wriggle help- lessly. He can’t apply Defense against incoming attacks, and can’t take combat-related actions. If someone’s holding him down, he can spend a point of Willpower to deliver a head butt or similar attack, but even that might not free him."
+			},
+			"summary": {
+				"CoD": "No combat actions. Can’t move or apply Defense."
+			},
+			"cause": {
+				"CoD": "The usual way to inflict this Tilt is through the Restrain grappling move. This often uses material means to prevent the victim from moving, such as binding limbs with duct tape or zip ties, tossing the victim into a car trunk or similar tight space, or applying painful holds and joint locks."
+			},
+			"resolve": {
+				"CoD": "An Immobilized target can break free by escaping from a grapple or snapping whatever binds her. If grappled, the character can struggle as normal but can only select the Break Free move on a success. If held by an item, the character must make a Strength + Athletics roll penalized by the item’s Durability. If a character’s arms and legs are both bound, he suffers a -2 penalty; this increases to -4 if he’s hogtied. On a success, he snaps the bindings or breaks free. Each roll, successful or not, deals a point of bashing damage."
+			},
+			"reference": {
+				"CoD": "284"
+			}
+		},
+
+		"Insane": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "The character suffers from a panic attack, sudden imbalance, or a full-on psychotic break. Her pulse races, her mind cannot focus on what she wants. The world’s an unstable place, and she’s unable to keep her balance."
+			},
+			"effect": {
+				"CoD": "Someone suffering a psychotic break isn’t the sort of person to go down without a fight. Her stated intent might be irrational or just plain impossible, and she might have fewer ethical problems with using extreme violence to get what she wants. The character gains a +1 bonus to all combat rolls, but takes actions after everyone else (if two characters suffer from the Insane Tilt, both act after everyone else but compare Initiative as normal). A character suffering from this Tilt cannot spend Willpower in combat, and suffers a -3 penalty to all Social rolls."
+			},
+			"summary": {
+				"CoD": "+1 to combat rolls, act after everyone else, -3 to Social rolls, can’t spend Willpower."
+			},
+			"cause": {
+				"CoD": "Faced with extraordinary circumstances, any character with an appropriate Condition may acquire the Insane Tilt. The Storyteller can call for a Resolve + Composure roll to resist a general anxiety that gnaws at the character’s mind; if the character fails, he gains the Tilt. If the character witnesses something truly horrific — a daughter watches her father walk to the end of the garden and shoot himself in the head, smiling all the while; a man stumbles into the wrong office at work and sees his coworkers feasting on the intern’s organs; a solder sees her unit gunned down by a sniper while she can do nothing — the Storyteller can rule that the Tilt is unavoidable.\nA character can work to inspire another character’s mad- ness in order to cause this Tilt. She could orchestrate events that she hopes will provoke a psychotic break, but that’s amateur hour. A professional swaps out her victim’s meds, giving stimulants just as his bipolar cycle ticks into mania, or dosing a paranoid schizophrenic with hallucinogenic drugs.\nSome supernatural creatures possess mind-affecting pow- ers that can apply this Tilt, even to characters who do not have an appropriate Condition."
+			},
+			"resolve": {
+				"CoD": "The specific effects of this Tilt don’t normally last beyond the end of the scene. A character can try to force her mind to a state of balance, but it’s not easy. She must sit and focus on blocking out the craziness. She rolls Resolve + Composure as an instant action, contested by a dice pool of (10 - her Willpower). She can’t take any other actions that turn, and doesn’t apply Defense against any attacks."
+			},
+			"reference": {
+				"CoD": "285"
+			}
+		},
+
+		"Insensate": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "The character shuts down, either due to extreme fear or sudden pleasure. He may huddle in a corner, cringe away from sudden noises, or stare into space as waves of pleasure lap over him."
+			},
+			"effect": {
+				"CoD": "The character can’t take any actions until the Tilt is resolved. He can apply Defense to incoming attacks, and if he takes any damage from an attack, he’s knocked free of whatever fogged his brain."
+			},
+			"summary": {
+				"CoD": "No combat actions. Can move and apply Defense. Taking damage ends the Tilt."
+			},
+			"cause": {
+				"CoD": "Several supernatural powers can leave their victim in a trance-like state of heightened emotion, whether a vampire’s mind-affecting tricks, or the pants- shitting terror of witnessing a werewolf take on an inhuman form. A truly heroic amount of alcohol or a hallucinogenic drug might have similar effects; administering such a drug is a Dexterity + Weaponry attack, which suffers a -1 modifier for the improvised weapon."
+			},
+			"resolve": {
+				"CoD": "The Tilt wears off at the end of the scene. The victim can spend a point of Willpower before then to act normally for one turn. A successful attack will also end the Tilt. If a character has been knocked insensible by drugs, then when this Tilt ends it is replaced with the Drugged Tilt."
+			},
+			"reference": {
+				"CoD": "285"
+			}
+		},
+
+		"Knocked Down": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "Something knocks the character to the floor, either toppling her with a powerful blow to the chest or taking one of her legs out from under her."
+			},
+			"effect": {
+				"CoD": "The character is knocked off her feet. If she hasn’t already acted this turn, she loses her action. Once she’s on the ground, a character is considered prone. The character can still apply Defense against incoming attacks, and can attempt to attack from the ground at a -2 penalty."
+			},
+			"summary": {
+				"CoD": "Lose action this turn (if it hasn’t been taken), knocked prone. Can apply Defense, attack from ground at -2."
+			},
+			"cause": {
+				"CoD": "A melee weapon with a damage modi- fier of +2 or greater, or a firearm with a damage modifier of +3 or more can be used to knock a character down with the force of the blow. Alternatively, a melee weapon or unarmed attack can knock an opponent down with a targeted attack against the legs (-2 modifier). The attacker declares that he wants to knock his opponent down, and halves the total damage done (rounding down). On a successful attack, the target is knocked down."
+			},
+			"resolve": {
+				"CoD": "The easiest way to end this Tilt is to stand up, which takes an action. A character who hasn’t yet acted can make a Dexterity + Athletics roll, minus any weapon modifier, instead of her normal action. If successful, she avoids the effects of this Tilt altogether. On a failure, she falls over and the Tilt applies as normal."
+			},
+			"reference": {
+				"CoD": "285"
+			}
+		},
+
+		"Leg Wrack": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "Your leg feels like it’s going to snap clean off whenever you move; when you stop moving you feel a burning numbness that encourages you to avoid action."
+			},
+			"effect": {
+				"CoD": "If your leg is broken, sprained, or dislocated, halve your Speed and suffer a -2 penalty on Physical rolls that require movement (and Defense). If both of your legs are wracked, you fall over — taking the Knocked Down Tilt — and cannot get up. Your Speed is reduced to 1; if you want to move at all, you cannot take any other action. Physical rolls that require movement are reduced to a chance die."
+			},
+			"summary": {
+				"CoD": "One leg: half Speed, -2 penalty on Physical rolls for movement. Both legs: Knocked Down, give up action to move at Speed 1, movement-based Physical rolls reduced to chance die."
+			},
+			"cause": {
+				"CoD": "Some supernatural powers can cripple a victim’s limbs or break bones with a touch. A character can have his leg knocked out by a targeted blow to the leg (-2 penalty) that deals more damage than the character’s Stamina."
+			},
+			"resolve": {
+				"CoD": "If the Tilt is inflicted as a result of an attack, mark an X under the leftmost Health box affected by that attack. The Tilt ends when that damage that caused it has healed. If the damage that inflicts this Tilt is aggravated, the character loses use of his leg permanently."
+			},
+			"reference": {
+				"CoD": "285-6"
+			}
+		},
+
+		"Poisoned": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "You’ve got poison inside you. It’s tearing you apart from the inside, burning like acid in your gut and making your head swim."
+			},
+			"effect": {
+				"CoD": "This Tilt applies a general sense of being poisoned to a character without worrying about Toxicity during combat. For the purposes of this Tilt, a poison is either “moderate” or “grave” — a moderate poison causes one point of bashing damage per turn of combat, while a grave poison ups that to one point of lethal damage per turn. If the Storyteller cares to continue the effects of the poison outside of combat, he can apply the standard rules for handling poisons and toxins when combat is complete."
+			},
+			"summary": {
+				"CoD": "Moderate: One point of bashing damage per turn. Grave: One point of lethal damage per turn."
+			},
+			"cause": {
+				"CoD": "It’s possible for a character to not know that he’s been poisoned. It could be as innocuous as switching drinks with a pretty girl who is the target of a mob hit, or as simple as walking into a house with a carbon monoxide leak. That being said, the main time poison comes up in combat is when one combatant inflicts it on another. Injecting your opponent with a syringe full of drain cleaner or snake venom counts as a Dexterity + Weaponry attack, and suffers a -1 modifier for the improvised weapon."
+			},
+			"resolve": {
+				"CoD": "Short of immediate medical attention — and how many fights take place in an emergency room? — all a victim can do is struggle on. Roll Stamina + Resolve as a reflexive action each turn that your character is poisoned. If your character intends to act (meaning, takes a non-reflexive action), the roll suffers a -3 penalty. Success counteracts the damage for one turn only."
+			},
+			"reference": {
+				"CoD": "286"
+			}
+		},
+		"Sick": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "Your stomach churns. You retch and heave but only succeed in bringing up bile. Sweat beads on your brow as you spike a fever. Your muscles ache with every movement. You’re wracked with hot and cold flushes as a sickness gnaws away at your insides."
+			},
+			"effect": {
+				"CoD": "This Tilt applies a general sickness to a character without worrying about the specific illness. For the purposes of this Tilt, a sickness is either “moderate” or “grave.” A mod- erate sickness, such as a cold, asthma, the flu, or just a bad hangover, causes a -1 penalty to all actions during combat. That penalty increases by one every two turns (the first two turns, the character suffers a -1 penalty, the next two turns the penalty is -2, and so on up to a maximum of -5 on turn nine). A grave sickness, such as pneumonia, heavy metal poisoning, or aggressive cancer, inflicts the same dice penalties as a mild sickness. In addition, the physical stress of fighting or even defending oneself from an attacker while gravely ill inflicts a point of bashing damage per turn of combat."
+			},
+			"summary": {
+				"CoD": "Moderate: -1 to all actions. Penalty increases by 1 every two turns. Grave: As moderate, but also inflicts one point of bashing damage per turn."
+			},
+			"cause": {
+				"CoD": "It’s not easy to deliberately make some- one sick. Sure, if you can get your hands on a vial of smallpox or deliberately use a disease you’ve got to make someone sick (a breaking point, especially in the case of grave diseases like AIDS), then you’ve got a reasonable chance. Some supernatu- ral creatures have abilities that can inflict diseases on others. Aside from that, you’ve just got to expose your opponent to the sickness long before you fight and hope for the best."
+			},
+			"resolve": {
+				"CoD": "This Tilt reflects the effects of sickness as they specifically applies to combat. The penalties inflicted by this Tilt fade at a rate of one point per turn once the character has a chance to rest, but any damage inflicted remains until the character can heal."
+			},
+			"reference": {
+				"CoD": "286"
+			}
+		},
+		"Stunned": {
+			"type": {
+				"CoD": "Personal"
+			},
+			"description": {
+				"CoD": "Your character is dazed and unable to think straight. Maybe her vision blurs. If she’s stunned as a result of a blow to the head, she’s probably got a concussion."
+			},
+			"effect": {
+				"CoD": "A character with the Stunned Tilt loses her next action, and halves her Defense until she can next act."
+			},
+			"summary": {
+				"CoD": "Lose next action. Half Defense until the characters next acts"
+			},
+			"cause": {
+				"CoD": "A character can be stunned by any attack that does at least as much damage as her Size in a single hit. Some weapons have a “stun” special ability. These double the weapon modifier only for the purposes of working out whether the attacker inflicts the Stunned Tilt. Attacks against the target’s head (see “Specified Targets,” CoD p. 92) count the character’s Size as one lower for the purposes of this Tilt. The Storyteller might determine that additional effects cause this Tilt, like being caught in the blast area of an explosion."
+			},
+			"resolve": {
+				"CoD": "The effects of this Tilt normally only last for a single turn. The character can end the Tilt during her own action by reflexively spending a point of Willpower to gather her wits, though she suffers a -3 modifier to any actions she takes that turn."
+			},
+			"reference": {
+				"CoD": "286"
+			}
+		}
+	}
+}

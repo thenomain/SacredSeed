@@ -1,60 +1,93 @@
 {
-    "information": "Tilts from Chronicles of Darkness:Hurt Locker.",
+    "information": "Tilts from Chronicles of Darkness: Hurt Locker.",
     "book": {
         "CoD:HL": "Hurt Locker"
     },
+	"structure": {
+		"type": "Type of Tilt.",
+		"description": "Description.",
+		"effect": "Effects and basic mechanics.",
+		"summary": "Mechanics summary of effect.",
+		"cause": "What can cause this.",
+		"resolve": "What can end this.",
+		"reference": "Page number(s)."
+	},
    "tilts": {
-        "bleeding": {
+        "Bleeding": {
+            "type": {
+                "CoD:HL": "Personal"
+            },
+            "description": {
+                "CoD:HL": "The character bleeds profusely from an open wound. If she doesn’t staunch the blood flow, she may soon pass out from shock and blood loss."
+            },
             "effect": {
-                "CoD:HL": null
+                "CoD:HL": "Bleeding characters suffer a –1 wound penalty (or have existing wound penalties increased in severity by +1). Additionally, each turn that she remains bleeding, she suffers one automatic point of bashing damage."
             },
             "cause": {
-                "CoD:HL": ""
+                "CoD:HL": "Firearms or bladed weapons that score more damage in a single attack than the victim’s Stamina can inflict this Tilt."
             },
             "resolve": {
-                "CoD:HL": ""
+                "CoD:HL": "If the character takes a turn to apply pressure and some sort of cloth or tie a tourniquet around the bleeding limb, she can stop the flow of blood and end the Tilt. Any form of accelerated healing, even a single point of bashing damage, will stop the bleeding as well. For obvious reasons, the undead are immune to this Tilt."
             },
             "reference": {
                 "CoD:HL": "143"
             }
         },
-        "burning": {
+        "Burning": {
+            "type": {
+                "CoD:HL": "Personal"
+            },
+            "description": {
+                "CoD:HL": "You have been set ablaze and will continue to burn until you somehow douse the flames."
+            },
             "effect": {
-                "CoD:HL": null
+                "CoD:HL": "You take automatic damage each turn equal to the 1 + the heat level of the fire, in addition to suffering the Blinded Tilt."
             },
             "cause": {
-                "CoD:HL": ""
+                "CoD:HL": "Being in the blast radius of an incendiary weapon or flamethrower stream, or being covered in gasoline and set aflame."
             },
             "resolve": {
-                "CoD:HL": ""
+                "CoD:HL": "You must take at least a turn to douse yourself in water or some suitable substance. You can drop and roll on the ground, which lessens the heat of the fire by one level of intensity each turn you do so until it’s finally out. Others can put out the fire by smothering it or beating it out with rugs or the like, taking an instant action to do so and reducing the heat by one level of intensity each turn."
             },
             "reference": {
                 "CoD:HL": "143"
             }
         },
-        "pierced armor": {
+        "Pierced Armor": {
+            "type": {
+                "CoD:HL": "Personal"
+            },
+            "description": {
+                "CoD:HL": "Repeated rounds or devastating attacks have rent your armor."
+            },
             "effect": {
-                "CoD:HL": null
+                "CoD:HL": "Your armor is damaged and functions at reduced effectiveness. Halve its effective values, rounded down, until you have had time to repair or readjust the armor."
             },
             "cause": {
-                "CoD:HL": ""
+                "CoD:HL": "Suffering more damage than your armor’s general rating in a single attack from high-caliber weapons or stabbing instruments."
             },
             "resolve": {
-                "CoD:HL": ""
+                "CoD:HL": "Taking at least a few turns to replace the armor, or repairing it outside of combat. Supernatural forms of armor might automatically repair themselves or be immune to this Tilt at Storyteller discretion."
             },
             "reference": {
                 "CoD:HL": "143"
             }
         },
-        "pinned": {
+        "Pinned": {
+            "type": {
+                "CoD:HL": "Personal"
+            },
+            "description": {
+                "CoD:HL": "One of your appendages or a piece of your clothing has been pinned to a surface. To get free you must tear away, potentially inflicting more damage in the process."
+            },
             "effect": {
-                "CoD:HL": null
+                "CoD:HL": "The target is pinned to a surface and may not move. Her Defense is halved and she cannot take actions that require full movement of her body, like Athletics rolls."
             },
             "cause": {
-                "CoD:HL": ""
+                "CoD:HL": "Piercing weapons and some improvised weapons, like bows, crossbows, and nail guns, can pin a target’s hand or foot to a surface. Spears can do it, too, but the attacker must relinquish use of the weapon to do so. Attackers can target an appendage (at a –3 penalty on top of the target’s Defense) or clothing (at a –5 penalty on top of the target’s Defense). If targeting a body part, inflicting damage equal to or greater than the target’s Stamina will leave her pinned. If targeting clothes, one success is enough."
             },
             "resolve": {
-                "CoD:HL": ""
+                "CoD:HL": "Removing the pinned appendage without tools requires a Strength + Stamina roll with a –3 modifier. If successful, she takes one point of lethal damage as she rips her hand or foot away from the impaling object. If done surgically or with tools, a Strength + Crafts roll is required instead, suffering only a –2 penalty, with no additional damage done if successful. Removing a pinned article of clothing requires an action to rip or slip free of it."
             },
             "reference": {
                 "CoD:HL": "143"
