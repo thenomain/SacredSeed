@@ -3,11 +3,6 @@
     "book": {
         "CoD:HL": "Hurt Locker"
     },
-    "persistent": {
-        "0": "No",
-        "1": "Yes",
-        "2": "Maybe"
-    },
     "conditions": {
         "Missing Time": {
             "persistent": 1,

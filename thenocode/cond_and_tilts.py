@@ -1,10 +1,8 @@
-# let's see if we can add conditions & tilts to django
-#  cd SacredSeed/world
-#  evennia startapp myapp
+# conditions & tilts
 
 import json
 
-persistence = {
+conditions_persistence = {
     0: "No",
     1: "Yes",
     2: "Maybe"
@@ -12,4 +10,6 @@ persistence = {
 
 # import the jsons and mush them together
 json_conditions = ""
-dumped_conditions = json.dumps(json_conditions, indent=4)  # Check what this is for, e.g. if needed.
+json_tilts = ""
+dumped_conditions = json.dumps(json_conditions, indent=4)  # Check what this is for, e.g. is it needed.
+dumped_tilts = json.dumps(json_tilts, indent=4)  # Check what this is for, e.g. is it needed.

@@ -4,7 +4,7 @@
         "CoD": "Chronicles of Darkness",
         "CoD:HL": "Hurt Locker",
         "VtM": "Vampire the Masquerade",
-        "WtF": "Werewolf the Foresaken",
+        "WtF": "Werewolf the Forsaken",
         "MtA": "Mage the Awakening",
         "CtL": "Changeling the Lost"
     },
@@ -39,6 +39,7 @@
                 "CoD": "288"
             }
         },
+
         "Blind": {
             "persistent": 0,
             "description": {
@@ -57,6 +58,7 @@
                 "CoD": "288"
             }
         },
+
         "Broken": {
             "persistent": 1,
             "description": {
@@ -75,6 +77,7 @@
                 "CoD": "288"
             }
         },
+
         "Bonded": {
             "persistent": 0,
             "description": {
@@ -93,6 +96,7 @@
                 "CoD": "288"
             }
         },
+
         "Connected": {
             "persistent": 0,
             "description": {
@@ -111,6 +115,7 @@
                 "CoD": "288"
             }
         },
+
         "Crippled": {
             "persistent": 1,
             "description": {
@@ -129,6 +134,7 @@
                 "CoD": "288"
             }
         },
+
         "Deprived": {
             "persistent": 0,
             "description": {
@@ -159,6 +165,7 @@
                 "CoD": "289"
             }
         },
+
         "Fugue": {
             "persistent": 1,
             "description": {
@@ -177,6 +184,7 @@
                 "CoD": "289"
             }
         },
+
         "Guilty": {
             "persistent": 0,
             "description": {
@@ -193,6 +201,7 @@
                 "CoD": "289"
             }
         },
+
         "Informed": {
             "persistent": 0,
             "description": {
@@ -209,6 +218,7 @@
                 "CoD": "289"
             }
         },
+
         "Inspired": {
             "persistent": 0,
             "description": {
@@ -225,6 +235,7 @@
                 "CoD": "289"
             }
         },
+
         "Leveraged": {
             "persistent": 0,
             "description": {
@@ -241,6 +252,7 @@
                 "CoD": "289"
             }
         },
+
         "Lost": {
             "persistent": 0,
             "description": {
@@ -255,6 +267,7 @@
                 "CoD": "289"
             }
         },
+
         "Madness": {
             "persistent": 1,
             "description": {
@@ -271,6 +284,7 @@
                 "CoD": "289"
             }
         },
+
         "Mute": {
             "persistent": 1,
             "description": {
@@ -287,6 +301,7 @@
                 "CoD": "290"
             }
         },
+
         "Notoriety": {
             "persistent": 0,
             "description": {
@@ -303,6 +318,7 @@
                 "CoD": "290"
             }
         },
+
         "Obsession": {
             "persistent": 1,
             "description": {
@@ -321,6 +337,7 @@
                 "CoD": "290"
             }
         },
+
         "Shaken": {
             "persistent": 0,
             "description": {
@@ -337,6 +354,7 @@
                 "CoD": "290"
             }
         },
+
         "Spooked": {
             "persistent": 0,
             "description": {
@@ -353,6 +371,7 @@
                 "VtM": "306"
             }
         },
+
         "Steadfast": {
             "persistent": 0,
             "description": {
@@ -369,6 +388,7 @@
                 "CoD": "290-1"
             }
         },
+
         "Swooned": {
             "persistent": 0,
             "description": {
@@ -386,9 +406,5 @@
                 "CoD": "291"
             }
         }
-    },
-
-    "tilts": {
-
     }
 }
